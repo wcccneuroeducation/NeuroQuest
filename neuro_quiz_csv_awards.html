@@ -163,17 +163,85 @@ color:white;
     .noaward { background: #f3f4f6; padding: 12px; border-radius: 10px; }
     /* MOBILE ONLY */
 @media (max-width: 768px) {
-table {
-font-size: 18px;
+.award-name {
+display:none;
+}
+
+.award-cell {
+font-size:24px;
+white-space:normal;
+}
+    table {
+
+font-size:
+16px;
+
+width:
+100%;
+
+table-layout:
+fixed;
+
 }
 
 th, td {
-padding: 6px;
+
+padding:
+4px;
+
+text-align:
+center;
+
 }
+
+th:nth-child(1),
+td:nth-child(1) {
+
+width:
+8%;
+
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+
+width:
+28%;
+
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+
+width:
+18%;
+
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+
+width:
+14%;
+
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+
+width:
+32%;
+
+}
+
+/* hide date on mobile */
 
 th:nth-child(6),
 td:nth-child(6) {
-display: none;
+
+display:
+none;
+
 }
 
 .award {
@@ -270,7 +338,7 @@ NEURO QUEST
 
     <div id="setup">
         <p>This quiz automatically loads questions from <strong>questions.csv</strong>.</p>
-        <p class="small">Keep the CSV in the same folder as this HTML file when hosted.</p>
+        <p class="small">Keep the CSV in the same folder as this html file when hosted.</p>
 
         <label for="categorySelect">Choose category:</label>
         <select id="categorySelect"></select>
@@ -574,7 +642,7 @@ function renderLeaderboard(category) {
             "<td>" + s.name + "</td>" +
             "<td>" + s.score + "/" + s.total + "</td>" +
             "<td>" + s.percent + "%</td>" +
-            "<td>" + s.awardEmoji + " " + s.awardName + "</td>" +
+            "<td class='award-cell'>" + s.awardEmoji + "<br><span class='award-name'>" + s.awardName + "</span></td>" +
             "<td>" + s.date + "</td>" +
             "</tr>";
     });
