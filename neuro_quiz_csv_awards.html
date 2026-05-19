@@ -163,7 +163,22 @@ color:white;
     .noaward { background: #f3f4f6; padding: 12px; border-radius: 10px; }
     /* MOBILE ONLY */
 @media (max-width: 768px) {
+table {
+font-size: 18px;
+}
 
+th, td {
+padding: 6px;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+display: none;
+}
+
+.award {
+font-size: 24px;
+}
 button {
 
 padding:
@@ -255,7 +270,7 @@ NEURO QUEST
 
     <div id="setup">
         <p>This quiz automatically loads questions from <strong>questions.csv</strong>.</p>
-        <p class="small">Keep the CSV in the same folder as this html file when hosted.</p>
+        <p class="small">Keep the CSV in the same folder as this HTML file when hosted.</p>
 
         <label for="categorySelect">Choose category:</label>
         <select id="categorySelect"></select>
