@@ -1,0 +1,130 @@
+﻿Category,Difficulty,QuestionGroup,Question,Answer,Explanation
+ACA,Beginner,1,ACA stroke commonly affects leg movement more than arm movement,TRUE,ACA supplies brain areas controlling leg movement.
+ACA,Beginner,1,ACA strokes often cause weakness in the opposite leg,TRUE,Effects are usually on the opposite side.
+ACA,Beginner,1,ACA strokes usually affect arm movement more than leg movement,FALSE,Arm weakness is more common in MCA strokes.
+ACA,Beginner,2,ACA supplies brain areas on the inside surface of the brain,TRUE,ACA mainly supplies medial areas.
+ACA,Beginner,2,ACA mainly supplies outer brain areas controlling face movement,FALSE,That is more MCA territory.
+ACA,Beginner,3,ACA stroke may affect motivation or make people seem less active,TRUE,Frontal involvement may reduce drive.
+ACA,Beginner,4,ACA stroke may cause bladder problems,TRUE,Brain areas involved in bladder control may be affected.
+ACA,Beginner,5,Left ACA stroke may affect the right leg,TRUE,Effects are generally opposite side.
+ACA,Beginner,2,ACA supplies areas linked to leg movement,TRUE,Leg motor areas receive ACA supply.
+ACA,Beginner,3,ACA stroke may make someone seem less interested in doing things,TRUE,Motivation can be affected.
+ACA,Beginner,3,ACA stroke commonly causes very overactive behaviour,FALSE,Reduced activity is more typical.
+ACA,Beginner,4,ACA strokes can sometimes affect continence,TRUE,Bladder control may be impaired.
+ACA,Beginner,4,ACA stroke usually improves bladder awareness,FALSE,Problems with control may occur.
+ACA,Beginner,5,ACA stroke symptoms usually affect the opposite side of the body,TRUE,Motor pathways cross.
+ACA,Beginner,5,ACA stroke mainly affects the same side of the body,FALSE,Symptoms are usually contralateral.
+ACA,Beginner,21,ACA stroke mainly affects arms on the same side of the body,FALSE,It usually affects legs not arms
+ACA,Beginner,6,ACA stroke can sometimes affect decision making,TRUE,Frontal areas may be involved.
+ACA,Beginner,6,ACA stroke may affect planning or starting tasks,TRUE,Frontal functions can be reduced.
+ACA,Beginner,6,ACA stroke only affects movement and nothing else,FALSE,Behaviour and planning may also change.
+ACA,Beginner,21,ACA stroke mainly affects arms on the opposite  side of the body,FALSE,It usually affects legs not arms
+ACA,Beginner,7,ACA mainly supplies the inside part of the brain,TRUE,ACA territory is mainly medial.
+ACA,Beginner,7,ACA mainly supplies the outside surface controlling face movement,FALSE,That is more MCA territory.
+ACA,Beginner,7,ACA territory includes brain areas involved in leg movement,TRUE,Leg motor areas are commonly supplied.
+ACA,Beginner,21,ACA stroke mainly affects arms ,FALSE,It usually affects legs not arms
+ACA,Beginner,8,ACA stroke may cause weakness in one leg,TRUE,Leg weakness is common.
+ACA,Beginner,8,ACA strokes usually affect both legs equally,FALSE,Effects are often one-sided.
+ACA,Beginner,8,ACA stroke may affect the opposite leg from the damaged side,TRUE,Motor pathways cross.
+,,,,,
+ACA,Beginner,9,ACA stroke can affect bladder control,TRUE,Continence problems may occur.
+ACA,Beginner,9,ACA stroke may cause problems reaching the toilet in time,TRUE,Bladder control may be impaired.
+ACA,Beginner,9,ACA stroke usually improves continence,FALSE,Bladder problems may occur.
+,,,,,
+ACA,Beginner,10,ACA stroke symptoms often involve leg weakness and behaviour change,TRUE,ACA territory includes motor and frontal areas.
+ACA,Beginner,10,ACA strokes mainly affect hearing,FALSE,Hearing is not typical ACA territory.
+ACA,Beginner,10,ACA stroke may reduce motivation,TRUE,Frontal involvement may reduce drive.
+,,,,,
+ACA,Beginner,11,ACA stroke may affect walking,TRUE,Leg weakness can impair mobility.
+ACA,Beginner,11,ACA stroke commonly affects speech more than movement,FALSE,Speech is more often MCA depending on side.
+ACA,Beginner,11,ACA stroke may make standing difficult due to leg weakness,TRUE,Leg motor areas are affected.
+,,,,,
+ACA,Beginner,12,ACA stroke commonly affects the opposite side of the body,TRUE,Effects are usually contralateral.
+ACA,Beginner,12,Right ACA stroke may affect the left leg,TRUE,Opposite side effects occur.
+ACA,Beginner,12,ACA stroke usually affects the same side as the damaged artery,FALSE,Symptoms are generally opposite.
+,,,,,
+ACA,Beginner,13,ACA supplies brain areas important for leg movement,TRUE,Leg motor cortex commonly supplied.
+ACA,Beginner,13,ACA does not supply any movement areas,FALSE,It supplies leg motor areas.
+ACA,Beginner,13,ACA stroke may lead to difficulty moving one leg,TRUE,Motor weakness may occur.
+,,,,,
+ACA,Beginner,14,ACA stroke may make people appear quieter or less active,TRUE,Motivation/initiation can reduce.
+ACA,Beginner,14,ACA stroke commonly causes increased energy and activity,FALSE,Reduced activity is more typical.
+ACA,Beginner,14,ACA stroke may affect willingness to start tasks,TRUE,Frontal involvement.
+,,,,,
+ACA,Beginner,15,ACA stroke may affect bladder control and walking,TRUE,Leg and continence changes can occur.
+ACA,Beginner,15,ACA strokes only affect sensation,FALSE,Motor and frontal effects also occur.
+ACA,Beginner,15,ACA stroke commonly affects the opposite leg,TRUE,Contralateral weakness is common.
+ACA,Beginner,16,ACA stroke may make climbing stairs harder,TRUE,Leg weakness may affect mobility.
+ACA,Beginner,16,ACA stroke commonly improves balance,FALSE,Weakness may impair balance.
+ACA,Beginner,16,ACA stroke may make walking slower,TRUE,Leg weakness can reduce mobility.
+ACA,Beginner,17,A patient with weak right leg and bladder problems may have ACA involvement,TRUE,This pattern can fit ACA.
+ACA,Beginner,17,Weak leg symptoms alone always mean spinal injury,FALSE,Brain lesions can cause weakness.
+ACA,Beginner,17,ACA symptoms may include movement and behaviour changes,TRUE,Multiple functions affected.
+ACA,Beginner,18,Left ACA stroke may affect right leg movement,TRUE,Effects are usually opposite side.
+ACA,Beginner,18,Right ACA stroke commonly affects right leg,FALSE,Symptoms are generally opposite.
+ACA,Beginner,18,Brain injury often affects the opposite side of movement,TRUE,Motor fibres cross.
+ACA,Beginner,19,ACA stroke commonly causes facial droop as the main symptom,FALSE,More MCA.
+ACA,Beginner,19,ACA stroke mainly affects one leg rather than face,TRUE,Leg involvement common.
+ACA,Beginner,19,ACA stroke always causes speech problems,FALSE,Depends on territory.
+ACA,Beginner,20,ACA stroke may make someone quieter or less interested in activities,TRUE,Frontal effects.
+ACA,Beginner,20,ACA stroke usually causes extreme excitement,FALSE,Reduced initiation more typical.
+ACA,Beginner,20,ACA stroke may change behaviour as well as movement,TRUE,Frontal areas involved.
+ICA,Beginner,1,ICA is a major vessel supplying the front part of the brain,TRUE,ICA contributes to anterior circulation.
+ICA,Beginner,1,ICA mainly supplies the back of the brain,FALSE,Posterior circulation supplies the back.
+ICA,Beginner,1,ICA helps supply ACA and MCA territories,TRUE,ICA branches contribute to both.
+,,,,,
+ICA,Beginner,2,ICA divides into ACA and MCA,TRUE,ICA gives rise to these major vessels.
+ICA,Beginner,2,ICA splits into ACA and MCA branches,TRUE,These are major anterior branches.
+ICA,Beginner,2,ICA divides directly into PCA,FALSE,PCA usually arises from posterior circulation.
+,,,,,
+ICA,Beginner,3,ICA can be thought of as a feeder vessel to anterior circulation,TRUE,It provides blood before branching.
+ICA,Beginner,3,ACA and MCA receive blood from ICA,TRUE,ICA is upstream.
+ICA,Beginner,3,ICA only supplies one brain territory,FALSE,It contributes to multiple areas.
+,,,,,
+ICA,Beginner,4,Problems with ICA blood flow may affect large brain areas,TRUE,ICA supplies major territories.
+ICA,Beginner,4,ICA issues can potentially affect ACA and MCA regions,TRUE,Downstream effects occur.
+ICA,Beginner,4,ICA problems only affect small isolated areas,FALSE,Effects may be widespread.
+,,,,,
+ICA,Beginner,5,Left ICA problems may cause symptoms on the right side of the body,TRUE,Effects are often opposite side.
+ICA,Beginner,5,ICA strokes usually affect the same side as the damaged vessel,FALSE,Symptoms often occur opposite side.
+ICA,Beginner,5,Brain blood vessel problems often affect the opposite side of movement,TRUE,Motor pathways cross.
+,,,,,
+ICA,Beginner,6,ICA blood flow contributes to movement areas of the brain,TRUE,ACA and MCA supply motor cortex.
+ICA,Beginner,6,ICA has no role in supplying movement areas,FALSE,It contributes through ACA/MCA.
+ICA,Beginner,6,ICA blood flow may affect movement if disrupted,TRUE,Motor deficits may occur.
+,,,,,
+ICA,Beginner,7,ICA contributes to blood supply for speech areas,TRUE,MCA territory includes language areas.
+ICA,Beginner,7,ICA disruption may affect speech depending on the side involved,TRUE,Language may be affected.
+ICA,Beginner,7,ICA only affects vision and nothing else,FALSE,Multiple functions may be affected.
+,,,,,
+ICA,Beginner,8,"ICA problems may affect face, arm or leg function",TRUE,Downstream territories vary.
+ICA,Beginner,8,ICA issues only affect leg movement,FALSE,Effects depend on branch involvement.
+ICA,Beginner,8,ICA supplies territories affecting different body functions,TRUE,Multiple regions supplied.
+,,,,,
+ICA,Beginner,9,ICA is part of anterior circulation,TRUE,Anterior circulation includes ICA.
+ICA,Beginner,9,ICA belongs to posterior circulation,FALSE,Posterior circulation involves vertebral/basilar.
+ICA,Beginner,9,ICA contributes blood to front brain territories,TRUE,Anterior circulation.
+,,,,,
+ICA,Beginner,10,ICA blood flow can contribute to eye circulation,TRUE,Ophthalmic artery arises from ICA.
+ICA,Beginner,10,ICA problems may sometimes affect vision,TRUE,Eye involvement can occur.
+ICA,Beginner,10,ICA never affects visual symptoms,FALSE,Visual changes may occur.
+,,,,,
+ICA,Beginner,11,ICA is important because it supplies large areas before branching,TRUE,ICA is a major source vessel.
+ICA,Beginner,11,ICA is a small vessel with limited influence,FALSE,It is a major artery.
+ICA,Beginner,11,ICA blood reaches several important brain territories,TRUE,Multiple areas supplied.
+,,,,,
+ICA,Beginner,12,ICA blood flow reaches ACA territory,TRUE,ACA is downstream.
+ICA,Beginner,12,ICA blood flow reaches MCA territory,TRUE,MCA is downstream.
+ICA,Beginner,12,ICA has no connection to ACA,FALSE,ACA branches from ICA.
+,,,,,
+ICA,Beginner,13,Reduced ICA blood flow may lead to weakness,TRUE,Motor areas can be affected.
+ICA,Beginner,13,Reduced ICA blood flow always causes hearing loss,FALSE,Hearing loss is not typical.
+ICA,Beginner,13,ICA disruption may affect movement or speech,TRUE,Functions supplied downstream.
+,,,,,
+ICA,Beginner,14,ICA sits earlier in the blood supply pathway than ACA,TRUE,ACA branches later.
+ICA,Beginner,14,ACA gives rise to ICA,FALSE,ICA comes before ACA.
+ICA,Beginner,14,ICA is upstream from ACA and MCA,TRUE,ICA branches into these vessels.
+,,,,,
+ICA,Beginner,15,Understanding ICA helps explain ACA and MCA blood supply,TRUE,ICA is the source vessel.
+ICA,Beginner,15,ICA learning is useful before studying ACA and MCA,TRUE,It helps understand circulation pathways.
+ICA,Beginner,15,You need to understand MCA before ICA,FALSE,ICA comes earlier in circulation.

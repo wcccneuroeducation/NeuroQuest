@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Neuro Quickfire CSV Quiz</title>
+<style>
+    body {
+
+font-family: Arial, sans-serif;
+
+background:
+linear-gradient(
+180deg,
+#050816,
+#0b1026);
+
+color:white;
+
+margin:0;
+
+padding:30px;
+
+text-align:center;
+
+}
+    .card {
+
+background:
+rgba(
+10,
+15,
+30,
+0.92);
+
+max-width:860px;
+
+margin:0 auto;
+
+padding:28px;
+
+border-radius:14px;
+
+border:
+1px solid
+#00ffff;
+
+box-shadow:
+
+0 0 20px
+rgba(
+0,
+255,
+255,
+0.25);
+
+}
+    h1 { margin-top: 0; }
+    select, input { padding: 12px; font-size: 16px; margin: 8px; }
+    button { padding: 14px 22px; margin: 10px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; }
+    .true-btn { background: #d7f5dc; }
+    .false-btn { background: #f9d7d7; }
+    .start-btn { background: #e2e8f0; }
+    #question {
+
+background:white;
+
+color:black;
+
+font-size:25px;
+
+margin:28px 0;
+
+line-height:1.35;
+
+padding:30px;
+
+border-radius:12px;
+
+}
+    #feedback { font-size: 20px; margin: 20px; min-height: 70px; }
+    #progress { margin-top: 10px; color: #555; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th{
+
+color:
+#ff4fd8;
+
+}
+
+td{
+
+color:
+#00ffff;
+
+}
+    .small {
+
+color:
+white;
+
+font-size:
+14px;
+
+}
+    .hidden { display: none; }
+    .award { font-size: 32px; margin: 15px; font-weight: bold; }
+    .brain3 {
+background:#9b59b6;
+color:white;
+}
+
+.brain2 {
+background:#3498db;
+color:white;
+}
+
+.brain1 {
+background:#6ab04c;
+color:white;
+}
+    .noaward { background: #f3f4f6; padding: 12px; border-radius: 10px; }
+</style>
+</head>
+<body>
+<div class="card">
+
+<img src="Quiz banner.png"
+style="
+width:100%;
+max-height:250px;
+object-fit:cover;
+border-radius:12px;
+margin-bottom:20px;
+">
+
+<h1 style="
+color:#ff00ff;
+font-size:48px;
+text-shadow:
+0 0 10px #ff00ff,
+0 0 20px #00ffff;
+">
+NEURO QUEST
+</h1>
+
+    <div id="setup">
+        <p>This quiz automatically loads questions from <strong>questions.csv</strong>.</p>
+        <p class="small">Keep the CSV in the same folder as this HTML file when hosted.</p>
+
+        <label for="categorySelect">Choose category:</label>
+        <select id="categorySelect"></select>
+
+        <br>
+
+        <label for="playerName">Name:</label>
+        <input id="playerName"
+placeholder="Enter name"
+oninput="populateCategories()">
+
+        <br>
+
+        <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+        <button onclick="clearLeaderboards()">
+🗑 Clear All Leaderboards
+</button>
+        <p id="loadStatus" class="small"></p>
+        <div id="setupLeaderboard"></div>
+    </div>
+
+    <div id="quiz" class="hidden">
+        <div id="progress"></div>
+        <div id="question"></div>
+
+        <button class="true-btn" onclick="answerQuestion(true)">TRUE</button>
+        <button class="false-btn" onclick="answerQuestion(false)">FALSE</button>
+
+        <div id="feedback"></div>
+    </div>
+
+    <div id="finish" class="hidden"></div>
+</div>
+
+<script>
+let allQuestions = [];
+let quizQuestions = [];
+let currentIndex = 0;
+let score = 0;
+let selectedCategory = "";
+let playerName = "";
+
+fetch("questions.csv")
+    .then(response => {
+        if (!response.ok) throw new Error("Could not load questions.csv");
+        return response.text();
+    })
+    .then(csvText => {
+        allQuestions = parseCSV(csvText);
+        populateCategories();
+        document.getElementById("loadStatus").innerHTML =
+            "✅ Loaded " + allQuestions.length + " questions from CSV.";
+        updateSetupLeaderboard();
+    })
+    .catch(error => {
+        document.getElementById("loadStatus").innerHTML =
+            "❌ Could not load questions.csv. If testing locally, run through Live Server rather than double-clicking the HTML file.";
+        console.error(error);
+    });
+
+function parseCSV(text) {
+    const rows = [];
+    let row = [];
+    let current = "";
+    let insideQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+
+        if (char === '"' && insideQuotes && nextChar === '"') {
+            current += '"';
+            i++;
+        } else if (char === '"') {
+            insideQuotes = !insideQuotes;
+        } else if (char === "," && !insideQuotes) {
+            row.push(current);
+            current = "";
+        } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+            if (current !== "" || row.length > 0) {
+                row.push(current);
+                rows.push(row);
+                row = [];
+                current = "";
+            }
+            if (char === "\r" && nextChar === "\n") i++;
+        } else {
+            current += char;
+        }
+    }
+
+    if (current !== "" || row.length > 0) {
+        row.push(current);
+        rows.push(row);
+    }
+
+    const headers = rows.shift().map(h => h.trim());
+
+    return rows
+        .filter(r => r.length > 1)
+        .map(r => {
+            let obj = {};
+            headers.forEach((h, i) => obj[h] = (r[i] || "").trim());
+            return obj;
+        })
+        .filter(q => q.Category && q.QuestionGroup && q.Question && q.Answer);
+}
+
+function populateCategories() {
+    const select = document.getElementById("categorySelect");
+    const player = document.getElementById("playerName")?.value || "";
+    const previousChoice = select.value;
+
+    const categories = [...new Set(allQuestions.map(q => q.Category.trim()))].sort();
+
+    select.innerHTML = "";
+
+    categories.forEach(cat => {
+        let option = document.createElement("option");
+        option.value = cat;
+
+        if (isUnlocked(player, cat)) {
+            option.textContent = cat;
+            option.disabled = false;
+        } else {
+            option.textContent = "🔒 " + cat;
+            option.disabled = true;
+        }
+
+        select.appendChild(option);
+    });
+
+    if (previousChoice && isUnlocked(player, previousChoice)) {
+        select.value = previousChoice;
+    } else if (isUnlocked(player, "ICA")) {
+        select.value = "ICA";
+    }
+
+    select.onchange = updateSetupLeaderboard;
+
+updateSetupLeaderboard();
+}
+
+function startQuiz() {
+    selectedCategory = document.getElementById("categorySelect").value;
+    playerName = document.getElementById("playerName").value.trim() || "Anonymous";
+
+    let categoryQuestions = allQuestions.filter(q =>
+        q.Category.trim().toUpperCase() === selectedCategory.trim().toUpperCase()
+    );
+
+    let grouped = {};
+
+    categoryQuestions.forEach(q => {
+        let groupKey = q.QuestionGroup.trim();
+        if (!grouped[groupKey]) grouped[groupKey] = [];
+        grouped[groupKey].push(q);
+    });
+
+    let oneFromEachGroup = Object.values(grouped).map(group => {
+        return group[Math.floor(Math.random() * group.length)];
+    });
+
+    quizQuestions = shuffle(oneFromEachGroup).slice(0, 20);
+
+    if (quizQuestions.length === 0) {
+        alert("No questions found for this category.");
+        return;
+    }
+
+    currentIndex = 0;
+    score = 0;
+
+    document.getElementById("setup").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    document.getElementById("finish").classList.add("hidden");
+
+    showQuestion();
+}
+
+function showQuestion() {
+    if (currentIndex >= quizQuestions.length) {
+        finishQuiz();
+        return;
+    }
+
+    let q = quizQuestions[currentIndex];
+
+    document.getElementById("progress").innerHTML =
+        "Question " + (currentIndex + 1) + " of " + quizQuestions.length +
+        " | Score: " + score;
+
+    document.getElementById("question").innerHTML = q.Question;
+    document.getElementById("feedback").innerHTML = "";
+}
+
+function answerQuestion(choice) {
+    let q = quizQuestions[currentIndex];
+    let correctAnswer = q.Answer.trim().toUpperCase() === "TRUE";
+
+    if (choice === correctAnswer) {
+        score++;
+        document.getElementById("feedback").innerHTML =
+            "✅ Correct<br><span class='small'>" + q.Explanation + "</span>";
+    } else {
+        document.getElementById("feedback").innerHTML =
+            "❌ Incorrect<br><span class='small'>" + q.Explanation + "</span>";
+    }
+
+    currentIndex++;
+    setTimeout(showQuestion, 1700);
+}
+
+function finishQuiz() {
+    document.getElementById("quiz").classList.add("hidden");
+
+    let percent = Math.round((score / quizQuestions.length) * 100);
+    let award = getAward(percent);
+    if(
+selectedCategory==="ICA"
+&&
+percent>=80
+){
+
+saveUnlock(
+playerName,
+"ICA",
+"ACA"
+);
+
+}
+    let code = generateUnlockCode(selectedCategory, award.code);
+
+    saveScore(playerName, selectedCategory, score, quizQuestions.length, percent, award.name, award.emoji);
+
+    let finishHTML =
+        "<h2>Finished</h2>" +
+        "<h3>" + playerName + ": " + score + "/" + quizQuestions.length + " (" + percent + "%)</h3>" +
+        "<div class='award " + award.className + "'>" + award.emoji + " " + award.name + "</div>" +
+        "<p>Unlock code: <strong>" + code + "</strong></p>" +
+        "<button class='start-btn' onclick='goHome()'>Continue</button>" +
+        renderLeaderboard(selectedCategory);
+
+    document.getElementById("finish").innerHTML = finishHTML;
+    document.getElementById("finish").classList.remove("hidden");
+}
+
+function getAward(percent) {
+    if (percent >= 90) return {name: "3 Brains", emoji: "🧠🧠🧠", code: "B3", className: "brain3"};
+    if (percent >= 80) return {name: "2 Brains", emoji: "🧠🧠", code: "B2", className: "brain2"};
+    if (percent >= 70) return {name: "1 Brain", emoji: "🧠", code: "B1", className: "brain1"};
+    return {name: "No brains yet", emoji: "🩺", code: "N", className: "noaward"};
+}
+
+function generateUnlockCode(category, awardCode) {
+    if (awardCode === "N") return "No code - score below Bronze";
+    return category.toUpperCase() + "-" + awardCode + "-" + new Date().getFullYear();
+}
+
+function saveScore(name, category, score, total, percent, awardName, awardEmoji) {
+    let scores = JSON.parse(localStorage.getItem("neuroQuizScores") || "[]");
+
+    scores.push({
+        name: name,
+        category: category,
+        score: score,
+        total: total,
+        percent: percent,
+        awardName: awardName,
+        awardEmoji: awardEmoji,
+        date: new Date().toLocaleString()
+    });
+
+    localStorage.setItem("neuroQuizScores", JSON.stringify(scores));
+}
+
+function getScoresForCategory(category) {
+    let scores = JSON.parse(localStorage.getItem("neuroQuizScores") || "[]");
+
+    return scores
+        .filter(s => s.category.toUpperCase() === category.toUpperCase())
+        .sort((a, b) => b.percent - a.percent || b.score - a.score)
+        .slice(0, 20);
+}
+
+function renderLeaderboard(category) {
+    let scores = getScoresForCategory(category);
+
+    if (scores.length === 0) {
+        return "<h2>" + category + " Leaderboard</h2><p>No scores yet.</p>";
+    }
+
+    let html =
+        "<h2>" + category + " Leaderboard</h2>" +
+        "<table>" +
+        "<tr><th>Rank</th><th>Name</th><th>Score</th><th>%</th><th>Award</th><th>Date</th></tr>";
+
+    scores.forEach((s, index) => {
+        html += "<tr>" +
+            "<td>" + (index + 1) + "</td>" +
+            "<td>" + s.name + "</td>" +
+            "<td>" + s.score + "/" + s.total + "</td>" +
+            "<td>" + s.percent + "%</td>" +
+            "<td>" + s.awardEmoji + " " + s.awardName + "</td>" +
+            "<td>" + s.date + "</td>" +
+            "</tr>";
+    });
+
+    html += "</table>";
+    return html;
+}
+
+function updateSetupLeaderboard() {
+    let category = document.getElementById("categorySelect").value;
+    if (!category) return;
+    document.getElementById("setupLeaderboard").innerHTML = renderLeaderboard(category);
+}
+
+function shuffle(array) {
+    let copy = [...array];
+
+    for (let i = copy.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+
+    return copy;
+}
+function clearLeaderboards(){
+
+    let confirmDelete =
+    confirm("Delete ALL leaderboards?");
+
+    if(confirmDelete){
+
+        localStorage.removeItem(
+        "neuroQuizScores"
+        );
+
+        alert(
+        "Leaderboards cleared"
+        );
+
+        location.reload();
+
+    }
+
+}
+function saveUnlock(playerName, category, unlockedCategory){
+
+    let progress =
+    JSON.parse(
+    localStorage.getItem(
+    "neuroProgress"
+    ) || "{}"
+    );
+
+    if(!progress[playerName]){
+        progress[playerName]={};
+    }
+
+    progress[playerName][unlockedCategory]=true;
+
+    localStorage.setItem(
+    "neuroProgress",
+    JSON.stringify(progress)
+    );
+
+}
+
+
+function isUnlocked(playerName, category){
+
+    let progress =
+    JSON.parse(
+    localStorage.getItem(
+    "neuroProgress"
+    ) || "{}"
+    );
+
+    if(category==="ICA"){
+        return true; // ICA always open
+    }
+
+    return progress[playerName]
+    &&
+    progress[playerName][category];
+
+}
+function goHome(){
+
+    document.getElementById("finish").classList.add("hidden");
+    document.getElementById("setup").classList.remove("hidden");
+
+    populateCategories();
+    updateSetupLeaderboard();
+
+}
+
+</script>
+</body>
+</html>
