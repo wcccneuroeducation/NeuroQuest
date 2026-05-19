@@ -262,7 +262,7 @@ height:90px;
 
 display:block;
 margin:22px auto;
-width:240x;
+width:240px;
 height:90px;
 
 }
@@ -542,7 +542,30 @@ function answerQuestion(choice) {
     currentIndex++;
     setTimeout(showQuestion, 1700);
 }
+function submitGlobalScore(name, category, score, total, percent, award) {
 
+    const formURL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSeqcBmjXNahqS48UWoKyGzXKnuLOe5CPCmRaFGAQKbBhjtxow/formResponse";
+
+    const data = new FormData();
+
+    data.append("entry.566987485", name);
+    data.append("entry.703819796", category);
+    data.append("entry.848919540", score);
+    data.append("entry.2003297694", total);
+    data.append("entry.2104975572", percent);
+    data.append("entry.2060613042", award);
+    data.append("entry.2009593854",
+        new Date().toLocaleString());
+
+    fetch(formURL, {
+        method: "POST",
+        mode: "no-cors",
+        body: data
+    });
+
+    console.log("Global score submitted");
+}
 function finishQuiz() {
     document.getElementById("quiz").classList.add("hidden");
 
@@ -564,7 +587,14 @@ playerName,
     let code = generateUnlockCode(selectedCategory, award.code);
 
     saveScore(playerName, selectedCategory, score, quizQuestions.length, percent, award.name, award.emoji);
-
+submitGlobalScore(
+    playerName,
+    selectedCategory,
+    score,
+    quizQuestions.length,
+    percent,
+    award.name
+);
     let finishHTML =
         "<h2>Finished</h2>" +
         "<h3>" + playerName + ": " + score + "/" + quizQuestions.length + " (" + percent + "%)</h3>" +
