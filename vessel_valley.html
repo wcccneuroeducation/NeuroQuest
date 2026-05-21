@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vessel Valley</title>
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        background: #ffffff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: #111;
+    }
+
+    h1 {
+        margin: 10px 0 20px;
+        font-size: clamp(32px, 7vw, 56px);
+    }
+
+    .map-wrap {
+        position: relative;
+        width: min(95vw, 650px);
+        margin: 0 auto;
+    }
+
+    .map-wrap img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .hotspot {
+        position: absolute;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 0, 0, 0.7);
+        background: rgba(255, 0, 0, 0.20);
+        cursor: pointer;
+    }
+
+    /* testing target areas - adjust these if needed */
+    .ica  { top: 17%; left: 38%; width: 12%; height: 8%; }
+    .aca  { top: 42%; left: 17%; width: 12%; height: 8%; }
+    .mca  { top: 40%; left: 60%; width: 12%; height: 8%; }
+    .acom { top: 71%; left: 38%; width: 12%; height: 8%; }
+
+    .hotspot-label {
+        position: absolute;
+        background: rgba(0,0,0,0.75);
+        color: white;
+        padding: 5px 8px;
+        border-radius: 8px;
+        font-size: 14px;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+    }
+
+    .ica-label  { top: 15%; left: 50%; }
+    .aca-label  { top: 39%; left: 23%; }
+    .mca-label  { top: 39%; left: 76%; }
+    .acom-label { top: 71%; left: 50%; }
+
+    .locked {
+        filter: grayscale(0.2);
+        opacity: 0.55;
+    }
+
+    .note {
+        max-width: 650px;
+        margin: 18px auto 0;
+        font-size: 16px;
+        color: #444;
+    }
+
+    /* When testing is finished, switch .hotspot to transparent */
+    /*
+    .hotspot {
+        border: none;
+        background: transparent;
+    }
+    .hotspot-label { display: none; }
+    */
+
+    .locked{
+filter: grayscale(100%);
+opacity:0.5;
+pointer-events:none;
+}
+.hidden {
+display:none;
+}
+
+#loginBox {
+text-align:center;
+margin-top:40px;
+}
+
+#playerInput {
+font-size:22px;
+padding:14px;
+margin:15px;
+}
+</style>
+</head>
+<body>
+<div id="loginBox">
+  <h2>Enter NeuroQuest</h2>
+  <input id="playerInput" placeholder="Enter name">
+  <br>
+  <button onclick="savePlayer()">Enter Vessel Valley</button>
+</div>
+
+<div id="mapBox" class="hidden">
+  <!-- your vessel valley image and hotspot buttons are here -->
+
+<h1>Vessel Valley</h1>
+
+<div class="map-wrap">
+    <img src="vessel_valley.png" alt="Vessel Valley map">
+
+    <button class="hotspot ica" onclick="openLevel('ICA')" aria-label="Open ICA quiz"></button>
+    <button class="hotspot aca" onclick="openLevel('ACA')" aria-label="Open ACA quiz"></button>
+    <button class="hotspot mca" onclick="openLevel('MCA')" aria-label="Open MCA quiz"></button>
+    <button class="hotspot acom" onclick="openLevel('ACom')" aria-label="Open ACom quiz"></button>
+
+    <div class="hotspot-label ica-label">ICA</div>
+    <div class="hotspot-label aca-label">ACA</div>
+    <div class="hotspot-label mca-label">MCA</div>
+    <div class="hotspot-label acom-label">ACom</div>
+</div>
+</div>
+
+<p class="note">Testing version: red areas show clickable target zones. These can be made invisible once aligned.</p>
+
+<script>
+    let playerName =
+localStorage.getItem("currentPlayer") || "";
+
+window.onload = function(){
+
+    if(playerName){
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("mapBox").classList.remove("hidden");
+    }
+
+};
+
+function savePlayer(){
+
+    let enteredName =
+    document.getElementById("playerInput").value.trim();
+
+    if(!enteredName){
+        alert("Please enter your name first");
+        return;
+    }
+
+    localStorage.setItem("currentPlayer", enteredName);
+
+    playerName = enteredName;
+
+    document.getElementById("loginBox").classList.add("hidden");
+    document.getElementById("mapBox").classList.remove("hidden");
+
+}
+
+function openLevel(level){
+
+    window.location.href =
+    "neuro_quiz_csv_awards.html?category="
+    + level;
+
+}
+function openLevel(category) {
+    window.location.href = "neuro_quiz_csv_awards.html?category=" + encodeURIComponent(category);
+}
+if(!isUnlocked(playerName,"ACA")){
+    document.querySelector(".aca")
+      .classList.add("locked");
+}
+</script>
+
+</body>
+</html>

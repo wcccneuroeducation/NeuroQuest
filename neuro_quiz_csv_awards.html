@@ -472,10 +472,15 @@ function populateCategories() {
 
 updateSetupLeaderboard();
 }
-
 function startQuiz() {
     selectedCategory = document.getElementById("categorySelect").value;
-    playerName = document.getElementById("playerName").value.trim() || "Anonymous";
+playerName =
+localStorage.getItem("currentPlayer")
+||
+document.getElementById("playerName")
+.value.trim()
+||
+"Anonymous";
 
     let categoryQuestions = allQuestions.filter(q =>
         q.Category.trim().toUpperCase() === selectedCategory.trim().toUpperCase()
@@ -756,8 +761,18 @@ function goHome(){
 
     populateCategories();
     updateSetupLeaderboard();
-
 }
+    window.addEventListener("load", function(){
+
+let savedPlayer =
+localStorage.getItem("currentPlayer");
+
+if(savedPlayer){
+document.getElementById("playerName").value = savedPlayer;
+}
+
+});
+
 
 </script>
 </body>
