@@ -25,11 +25,11 @@
         margin: 0 auto;
     }
 
-    .map-wrap img {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
+    .base-map {
+width: 100%;
+height: auto;
+display: block;
+}
 
     .hotspot {
         position: absolute;
@@ -37,6 +37,7 @@
         border: 3px solid rgba(255, 0, 0, 0.7);
         background: rgba(255, 0, 0, 0.20);
         cursor: pointer;
+        z-index:3;
     }
 
     /* testing target areas - adjust these if needed */
@@ -90,7 +91,23 @@ pointer-events:none;
 .hidden {
 display:none;
 }
+.course-overlay{
+position:absolute;
+pointer-events:none;
+}
 
+/* ICA overlay position */
+
+.ica-overlay{
+
+top:18%;
+left:40%;
+
+width:9%;
+height:4.5%;
+z-index:2;
+
+}
 #loginBox {
 text-align:center;
 margin-top:40px;
@@ -117,8 +134,10 @@ margin:15px;
 <h1>Vessel Valley</h1>
 
 <div class="map-wrap">
-    <img src="vessel_valley.png" alt="Vessel Valley map">
-
+    <img src="vessel_valley.png"  class="base-map" alt="Vessel Valley map">
+<img
+src="red_overlay_ica.png"
+class="course-overlay ica-overlay">
     <button class="hotspot ica" onclick="openLevel('ICA')" aria-label="Open ICA quiz"></button>
     <button class="hotspot aca" onclick="openLevel('ACA')" aria-label="Open ACA quiz"></button>
     <button class="hotspot mca" onclick="openLevel('MCA')" aria-label="Open MCA quiz"></button>
