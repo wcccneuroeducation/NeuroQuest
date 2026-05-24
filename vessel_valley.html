@@ -32,13 +32,17 @@ display: block;
 }
 
     .hotspot {
-        position: absolute;
-        border-radius: 50%;
-        border: 3px solid rgba(255, 0, 0, 0.7);
-        background: rgba(255, 0, 0, 0.20);
-        cursor: pointer;
-        z-index:3;
-    }
+position:absolute;
+border-radius:50%;
+border:none;
+background:transparent;
+padding:0;
+margin:0;
+appearance:none;
+-webkit-appearance:none;
+cursor:pointer;
+z-index:3;
+}
 
     /* testing target areas - adjust these if needed */
     .ica  { top: 17%; left: 38%; width: 12%; height: 8%; }
@@ -48,7 +52,7 @@ display: block;
 
     .hotspot-label {
         position: absolute;
-        background: rgba(0,0,0,0.75);
+        background:transparent;
         color: white;
         padding: 5px 8px;
         border-radius: 8px;
@@ -56,16 +60,17 @@ display: block;
         pointer-events: none;
         transform: translate(-50%, -50%);
     }
-
+/*
     .ica-label  { top: 15%; left: 50%; }
     .aca-label  { top: 39%; left: 23%; }
     .mca-label  { top: 39%; left: 76%; }
     .acom-label { top: 71%; left: 50%; }
 
-    .locked {
+   .locked {
         filter: grayscale(0.2);
         opacity: 0.55;
     }
+       */ 
 
     .note {
         max-width: 650px;
@@ -84,8 +89,9 @@ display: block;
     */
 
     .locked{
-filter: grayscale(100%);
+/*filter: grayscale(100%);
 opacity:0.5;
+*/
 pointer-events:none;
 }
 .hidden {
@@ -106,8 +112,93 @@ left:40%;
 width:9%;
 height:4.5%;
 z-index:2;
+}
+.ica-star-overlay{
+
+top:18%;
+left:40%;
+
+width:9%;
+height:4.5%;
+
+z-index:2;
 
 }
+/* ACA overlay position */
+.aca-overlay{
+
+top:43%;
+left: 18.7%;
+
+width:8.5%;
+height:4.5%;
+
+z-index:2;
+
+}
+
+.aca-star-overlay{
+
+top:43%;
+left:18.7%;
+
+width:8.5%;
+height:4.5%;
+
+z-index:2;
+}
+/* MCA overlay position */
+
+.mca-overlay{
+
+top:41.5%;
+left:61.7%;
+
+width:8.2%;
+height:4.5%;
+
+z-index:2;
+
+}
+
+.mca-star-overlay{
+
+top:41.5%;
+left:61.8%;
+
+width:8.2%;
+height:4.5%;
+
+z-index:2;
+
+}
+/* ACom overlay position */
+
+.acom-overlay{
+
+top:72.5%;
+left:39.5%;
+
+width:9%;
+height:4.5%;
+
+z-index:2;
+
+}
+
+.acom-star-overlay{
+
+top:72.5%;
+left:38.5%;
+
+width:9%;
+height:4.5%;
+
+z-index:2;
+
+}
+
+
 #loginBox {
 text-align:center;
 margin-top:40px;
@@ -138,6 +229,30 @@ margin:15px;
 <img
 src="red_overlay_ica.png"
 class="course-overlay ica-overlay">
+<img
+src="blue_star_overlay_ica.png"
+class="course-overlay ica-star-overlay hidden">
+<img
+src="red_overlay_aca.png"
+class="course-overlay aca-overlay">
+<img
+src="blue_star_overlay_aca.png"
+class="course-overlay aca-star-overlay hidden">
+<img
+src="red_overlay_mca.png"
+class="course-overlay mca-overlay">
+<img
+src="blue_star_overlay_mca.png"
+class="course-overlay mca-star-overlay hidden">
+<img
+src="red_overlay_acom.png"
+class="course-overlay acom-overlay">
+
+<img
+src="blue_star_overlay_acom.png"
+class="course-overlay acom-star-overlay hidden">
+
+
     <button class="hotspot ica" onclick="openLevel('ICA')" aria-label="Open ICA quiz"></button>
     <button class="hotspot aca" onclick="openLevel('ACA')" aria-label="Open ACA quiz"></button>
     <button class="hotspot mca" onclick="openLevel('MCA')" aria-label="Open MCA quiz"></button>
@@ -147,10 +262,11 @@ class="course-overlay ica-overlay">
     <div class="hotspot-label aca-label">ACA</div>
     <div class="hotspot-label mca-label">MCA</div>
     <div class="hotspot-label acom-label">ACom</div>
+    
 </div>
 </div>
+    
 
-<p class="note">Testing version: red areas show clickable target zones. These can be made invisible once aligned.</p>
 
 <script>
     let playerName =
@@ -161,6 +277,7 @@ window.onload = function(){
     if(playerName){
         document.getElementById("loginBox").classList.add("hidden");
         document.getElementById("mapBox").classList.remove("hidden");
+        updateMapProgress();
     }
 
 };
@@ -169,6 +286,7 @@ function savePlayer(){
 
     let enteredName =
     document.getElementById("playerInput").value.trim();
+    
 
     if(!enteredName){
         alert("Please enter your name first");
@@ -181,6 +299,7 @@ function savePlayer(){
 
     document.getElementById("loginBox").classList.add("hidden");
     document.getElementById("mapBox").classList.remove("hidden");
+updateMapProgress();
 
 }
 
@@ -194,10 +313,128 @@ function openLevel(level){
 function openLevel(category) {
     window.location.href = "neuro_quiz_csv_awards.html?category=" + encodeURIComponent(category);
 }
+/* Test deleted now - this was just to check the locking mechanism works
 if(!isUnlocked(playerName,"ACA")){
     document.querySelector(".aca")
       .classList.add("locked");
 }
+      */
+function updateMapProgress(){
+
+let playerName =
+localStorage.getItem("currentPlayer");
+
+let progress =
+JSON.parse(
+localStorage.getItem("neuroProgress") || "{}"
+);
+
+let playerProgress =
+progress[playerName] || {};
+
+if(
+playerProgress["ICA"] &&
+playerProgress["ICA"].completed === true
+){
+
+document.querySelector(".ica-overlay").style.display =
+"none";
+
+}
+
+if(
+playerProgress["ICA"] &&
+playerProgress["ICA"].brains === 3
+){
+
+document.querySelector(".ica-star-overlay").classList.remove("hidden");
+
+}
+if(
+playerProgress["ACA"] &&
+playerProgress["ACA"].completed === true
+){
+
+document.querySelector(
+".aca-overlay"
+).style.display =
+"none";
+
+}
+
+if(
+playerProgress["ACA"] &&
+playerProgress["ACA"].brains === 3
+){
+
+document.querySelector(".aca-star-overlay")
+.classList.remove("hidden");
+
+}
+if(
+playerProgress["MCA"] &&
+playerProgress["MCA"].completed === true
+){
+
+document.querySelector(
+".mca-overlay"
+).style.display =
+"none";
+
+}
+
+
+if(
+playerProgress["MCA"] &&
+playerProgress["MCA"].brains === 3
+){
+
+document.querySelector(
+".mca-star-overlay"
+).classList.remove(
+"hidden"
+);
+
+}
+if(
+playerProgress["ACom"] &&
+playerProgress["ACom"].completed === true
+){
+
+document.querySelector(
+".acom-overlay"
+).style.display =
+"none";
+
+}
+
+if(
+playerProgress["ACom"] &&
+playerProgress["ACom"].brains === 3
+){
+
+document.querySelector(
+".acom-star-overlay"
+).classList.remove(
+"hidden"
+);
+
+}
+}
+function openLevel(category){
+
+localStorage.setItem(
+"currentMap",
+"vessel_valley.html"
+);
+
+window.location.href =
+"neuro_quiz_csv_awards.html?category="
++
+encodeURIComponent(category);
+
+}
+
 </script>
 
 </body>

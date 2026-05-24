@@ -439,10 +439,30 @@ function parseCSV(text) {
 }
 
 function populateCategories() {
-    const select = document.getElementById("categorySelect");
-    const player = document.getElementById("playerName")?.value || "";
-    const previousChoice = select.value;
 
+const select =
+document.getElementById(
+"categorySelect"
+);
+
+const player =
+localStorage.getItem(
+"currentPlayer"
+)
+||
+document.getElementById(
+"playerName"
+)?.value
+||
+"";
+    const previousChoice = select.value;
+const urlParams =
+new URLSearchParams(
+window.location.search
+);
+
+const requestedCategory =
+urlParams.get("category");
     const categories = [...new Set(allQuestions.map(q => q.Category.trim()))].sort();
 
     select.innerHTML = "";
@@ -462,11 +482,32 @@ function populateCategories() {
         select.appendChild(option);
     });
 
-    if (previousChoice && isUnlocked(player, previousChoice)) {
-        select.value = previousChoice;
-    } else if (isUnlocked(player, "ICA")) {
-        select.value = "ICA";
-    }
+    if(
+requestedCategory &&
+isUnlocked(player, requestedCategory)
+){
+
+select.value =
+requestedCategory;
+
+}
+else if(
+previousChoice &&
+isUnlocked(player, previousChoice)
+){
+
+select.value =
+previousChoice;
+
+}
+else if(
+isUnlocked(player,"ICA")
+){
+
+select.value =
+"ICA";
+
+}
 
     select.onchange = updateSetupLeaderboard;
 
@@ -576,6 +617,11 @@ function finishQuiz() {
 
     let percent = Math.round((score / quizQuestions.length) * 100);
     let award = getAward(percent);
+    saveLevelProgress(
+playerName,
+selectedCategory,
+award
+);
     if(
 selectedCategory==="ICA"
 &&
@@ -587,8 +633,69 @@ playerName,
 "ICA",
 "ACA"
 );
+saveUnlock(
+playerName,
+"ICA",
+"MCA"
+);
+}
+if(
+selectedCategory==="ACA"
+&&
+percent>=80
+){
+
+let progress =
+JSON.parse(
+localStorage.getItem(
+"neuroProgress"
+) || "{}"
+);
+
+if(
+progress[playerName]["MCA"]
+&&
+progress[playerName]["MCA"].completed === true
+){
+
+saveUnlock(
+playerName,
+"ACA",
+"ACom"
+);
 
 }
+
+}
+if(
+selectedCategory==="MCA"
+&&
+percent>=80
+){
+
+let progress =
+JSON.parse(
+localStorage.getItem(
+"neuroProgress"
+) || "{}"
+);
+
+if(
+progress[playerName]["ACA"]
+&&
+progress[playerName]["ACA"].completed === true
+){
+
+saveUnlock(
+playerName,
+"MCA",
+"ACom"
+);
+}
+}
+
+
+
     let code = generateUnlockCode(selectedCategory, award.code);
 
     saveScore(playerName, selectedCategory, score, quizQuestions.length, percent, award.name, award.emoji);
@@ -605,7 +712,7 @@ submitGlobalScore(
         "<h3>" + playerName + ": " + score + "/" + quizQuestions.length + " (" + percent + "%)</h3>" +
         "<div class='award " + award.className + "'>" + award.emoji + " " + award.name + "</div>" +
         "<p>Unlock code: <strong>" + code + "</strong></p>" +
-        "<button class='start-btn' onclick='goHome()'>Continue</button>" +
+        "<button class='start-btn' onclick=\"returnToMap()\">Continue</button>" +
         renderLeaderboard(selectedCategory);
 
     document.getElementById("finish").innerHTML = finishHTML;
@@ -613,7 +720,7 @@ submitGlobalScore(
 }
 
 function getAward(percent) {
-    if (percent >= 90) return {name: "3 Brains", emoji: "🧠🧠🧠", code: "B3", className: "brain3"};
+    if (percent >= 100) return {name: "3 Brains", emoji: "🧠🧠🧠", code: "B3", className: "brain3"};
     if (percent >= 80) return {name: "2 Brains", emoji: "🧠🧠", code: "B2", className: "brain2"};
     if (percent >= 70) return {name: "1 Brain", emoji: "🧠", code: "B1", className: "brain1"};
     return {name: "No brains yet", emoji: "🩺", code: "N", className: "noaward"};
@@ -640,7 +747,40 @@ function saveScore(name, category, score, total, percent, awardName, awardEmoji)
 
     localStorage.setItem("neuroQuizScores", JSON.stringify(scores));
 }
+function saveLevelProgress(playerName, level, award){
 
+let progress =
+JSON.parse(
+localStorage.getItem("neuroProgress") || "{}"
+);
+
+if(!progress[playerName]){
+progress[playerName] = {};
+}
+
+let brains = 0;
+
+if(award.name === "3 Brains"){
+brains = 3;
+}
+else if(award.name === "2 Brains"){
+brains = 2;
+}
+else if(award.name === "1 Brain"){
+brains = 1;
+}
+
+progress[playerName][level] = {
+completed: brains >= 2,
+brains: brains
+};
+
+localStorage.setItem(
+"neuroProgress",
+JSON.stringify(progress)
+);
+
+}
 function getScoresForCategory(category) {
     let scores = JSON.parse(localStorage.getItem("neuroQuizScores") || "[]");
 
@@ -772,6 +912,14 @@ document.getElementById("playerName").value = savedPlayer;
 }
 
 });
+function returnToMap(){
+
+window.location.href =
+localStorage.getItem("currentMap")
+||
+"vessel_valley.html";
+
+}
 
 
 </script>

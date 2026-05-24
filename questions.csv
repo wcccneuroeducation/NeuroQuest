@@ -128,3 +128,75 @@ ICA,Beginner,14,ICA is upstream from ACA and MCA,TRUE,ICA branches into these ve
 ICA,Beginner,15,Understanding ICA helps explain ACA and MCA blood supply,TRUE,ICA is the source vessel.
 ICA,Beginner,15,ICA learning is useful before studying ACA and MCA,TRUE,It helps understand circulation pathways.
 ICA,Beginner,15,You need to understand MCA before ICA,FALSE,ICA comes earlier in circulation.
+MCA,Beginner,1,MCA stroke commonly affects arm movement more than leg movement,True,MCA supplies areas controlling arm movement.
+MCA,Beginner,1,MCA strokes often cause weakness in the opposite arm,True,Effects are usually on the opposite side.
+MCA,Beginner,1,MCA strokes usually affect leg movement more than arm movement,False,Leg weakness is more typical of ACA strokes.
+MCA,Beginner,2,MCA supplies brain areas on the outer surface of the brain,True,MCA mainly supplies lateral areas.
+MCA,Beginner,2,MCA mainly supplies inner brain areas controlling leg movement,False,Inner surfaces are more ACA territory.
+MCA,Beginner,2,MCA supplies areas linked with face and arm movement,True,Face and arm motor regions receive MCA supply.
+MCA,Beginner,3,MCA stroke commonly causes facial weakness,True,Facial motor regions are often affected.
+MCA,Beginner,3,MCA strokes rarely affect facial movement,False,Facial weakness is common.
+MCA,Beginner,3,MCA stroke may cause weakness of the opposite side of the face,True,Effects are generally contralateral.
+MCA,Beginner,4,Left MCA stroke may affect speech,True,Language areas are usually in the left hemisphere.
+MCA,Beginner,4,MCA strokes never cause speech problems,False,Aphasia may occur with dominant hemisphere strokes.
+MCA,Beginner,4,Dominant hemisphere MCA stroke may cause aphasia,True,Speech centres may be involved.
+MCA,Beginner,5,Right MCA stroke may cause neglect of the left side,True,Neglect is common with non-dominant hemisphere injury.
+MCA,Beginner,5,MCA stroke usually improves awareness of one side of the body,False,Neglect may reduce awareness.
+MCA,Beginner,5,People with right MCA stroke may ignore objects on one side,True,Spatial neglect can occur.
+MCA,Beginner,6,MCA strokes usually affect the opposite side of the body,True,Motor pathways cross.
+MCA,Beginner,6,MCA strokes mainly affect the same side of the body,False,Symptoms are generally contralateral.
+MCA,Beginner,6,Left MCA stroke often affects the right side of the body,True,Opposite-side weakness is common.
+MCA,Beginner,7,MCA stroke may cause sensory loss in the face or arm,True,Sensory cortex regions may be affected.
+MCA,Beginner,7,MCA stroke only affects movement and never sensation,False,Sensory deficits may occur.
+MCA,Beginner,7,MCA territory includes areas involved in sensation,True,Sensory cortex receives MCA supply.
+MCA,Beginner,8,MCA stroke may affect understanding or producing language,True,Language centres may be involved.
+MCA,Beginner,8,MCA strokes always preserve communication ability,False,Communication difficulties can occur.
+MCA,Beginner,8,MCA stroke can produce aphasia in dominant hemisphere injury,True,Language impairment is common.
+MCA,Beginner,9,MCA strokes may cause visual field loss,True,Optic pathways can be affected.
+MCA,Beginner,9,MCA stroke usually improves peripheral vision,False,Visual deficits may occur.
+MCA,Beginner,9,People with MCA stroke may miss objects on one side of vision,True,Visual field defects are possible.
+MCA,Beginner,10,MCA is the most commonly affected artery in stroke,True,MCA strokes are common.
+MCA,Beginner,10,ACA is the most common site of stroke,False,MCA strokes occur more frequently.
+MCA,Beginner,10,MCA territory strokes are among the most frequently seen,True,MCA infarcts are common.
+MCA,Beginner,11,MCA supplies areas involved in hand function,True,Fine motor control of hands may be affected.
+MCA,Beginner,11,MCA stroke rarely affects hand movement,False,Hand weakness is common.
+MCA,Beginner,11,MCA stroke may reduce fine motor control in the opposite hand,True,Contralateral hand function may be impaired.
+MCA,Beginner,12,MCA strokes often affect both face and arm weakness together,True,Face and arm regions are nearby.
+MCA,Beginner,12,MCA stroke usually affects legs without affecting face or arms,False,Face and arm involvement is more typical.
+MCA,Beginner,12,MCA territory includes motor areas controlling face and upper limb,True,MCA supplies lateral motor cortex.
+ACom,Beginner,1,ACom aneurysms may affect frontal lobe function,True,ACom aneurysms can affect nearby frontal structures.
+ACom,Beginner,1,ACom aneurysms only affect the cerebellum,False,ACom aneurysms are located in the anterior circulation.
+ACom,Beginner,1,Frontal lobe symptoms may occur with ACom aneurysms,True,Nearby frontal areas can be involved.
+ACom,Beginner,2,ACom aneurysms may cause personality changes,True,Frontal lobe involvement may alter behaviour.
+ACom,Beginner,2,ACom aneurysms never affect behaviour,False,Behavioural changes can occur.
+ACom,Beginner,2,Changes in behaviour may be seen with ACom aneurysms,True,Frontal dysfunction may occur.
+ACom,Beginner,3,ACom aneurysms may affect memory,True,Memory pathways are near the ACom region.
+ACom,Beginner,3,ACom aneurysms usually improve short term memory,False,Memory impairment may occur.
+ACom,Beginner,3,Memory problems can occur after ACom aneurysm rupture,True,Nearby structures involved in memory may be affected.
+ACom,Beginner,4,ACom aneurysms are located in the anterior circulation,True,The anterior communicating artery is part of anterior circulation.
+ACom,Beginner,4,ACom aneurysms arise from the basilar artery,False,Basilar aneurysms are posterior circulation.
+ACom,Beginner,4,The anterior communicating artery connects anterior circulation vessels,True,It links the two ACAs.
+ACom,Beginner,5,ACom aneurysms may present with sudden severe headache,True,Subarachnoid haemorrhage commonly causes thunderclap headache.
+ACom,Beginner,5,ACom rupture usually causes mild chronic headache only,False,Presentation is often sudden and severe.
+ACom,Beginner,5,Sudden thunderclap headache may indicate ACom rupture,True,This is a classic presentation.
+ACom,Beginner,6,ACom aneurysm rupture may cause subarachnoid haemorrhage,True,Rupture releases blood into the subarachnoid space.
+ACom,Beginner,6,ACom aneurysms cannot cause bleeding,False,Rupture can lead to haemorrhage.
+ACom,Beginner,6,Bleeding around the brain may occur after ACom rupture,True,Subarachnoid bleeding is common.
+ACom,Beginner,7,ACom aneurysms are associated with the circle of Willis,True,ACom forms part of the circle of Willis.
+ACom,Beginner,7,ACom lies outside the cerebral circulation,False,It is part of cerebral circulation.
+ACom,Beginner,7,The anterior communicating artery connects the left and right ACA,True,This connection forms part of the circle of Willis.
+ACom,Beginner,8,Confusion may occur after ACom aneurysm rupture,True,Frontal and diffuse effects may cause confusion.
+ACom,Beginner,8,ACom rupture never affects consciousness,False,Reduced consciousness may occur.
+ACom,Beginner,8,Patients with ACom rupture may become confused or drowsy,True,Raised ICP and haemorrhage can affect consciousness.
+ACom,Beginner,9,ACom aneurysms may affect decision making,True,Frontal lobe involvement may impair executive function.
+ACom,Beginner,9,ACom aneurysms only affect leg movement,False,Cognitive and behavioural effects are common.
+ACom,Beginner,9,Executive function problems may occur with ACom aneurysms,True,Frontal systems may be disrupted.
+ACom,Beginner,10,ACom aneurysms are common intracranial aneurysms,True,ACom aneurysms are among the most common.
+ACom,Beginner,10,ACom aneurysms are extremely rare,False,They are frequently encountered.
+ACom,Beginner,10,Anterior communicating artery aneurysms are commonly seen in neuro practice,True,They are a frequent aneurysm location.
+ACom,Beginner,11,ACom rupture may lead to hydrocephalus,True,Blood can obstruct CSF pathways.
+ACom,Beginner,11,Hydrocephalus never occurs after ACom rupture,False,Hydrocephalus is a recognised complication.
+ACom,Beginner,11,CSF flow problems may occur after ACom haemorrhage,True,Blood products may block CSF circulation.
+ACom,Beginner,12,ACom aneurysm rupture is a neurosurgical emergency,True,Rapid treatment is often required.
+ACom,Beginner,12,ACom rupture can safely be ignored if headache settles,False,Urgent assessment is essential.
+ACom,Beginner,12,Urgent medical treatment is required after suspected ACom rupture,True,Early intervention improves outcomes.
