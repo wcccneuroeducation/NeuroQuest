@@ -253,10 +253,10 @@ src="blue_star_overlay_acom.png"
 class="course-overlay acom-star-overlay hidden">
 
 
-    <button class="hotspot ica" onclick="openLevel('ICA')" aria-label="Open ICA quiz"></button>
-    <button class="hotspot aca" onclick="openLevel('ACA')" aria-label="Open ACA quiz"></button>
-    <button class="hotspot mca" onclick="openLevel('MCA')" aria-label="Open MCA quiz"></button>
-    <button class="hotspot acom" onclick="openLevel('ACom')" aria-label="Open ACom quiz"></button>
+    <button class="hotspot ica" onclick="handleLevelClick('ICA')"></button>
+<button class="hotspot aca" onclick="handleLevelClick('ACA')"></button>
+<button class="hotspot mca" onclick="handleLevelClick('MCA')"></button>
+<button class="hotspot acom" onclick="handleLevelClick('ACom')"></button>
 
     <div class="hotspot-label ica-label">ICA</div>
     <div class="hotspot-label aca-label">ACA</div>
@@ -434,7 +434,51 @@ window.location.href =
 encodeURIComponent(category);
 
 }
+function levelUnlocked(level){
 
+let player =
+localStorage.getItem("currentPlayer");
+
+let progress =
+JSON.parse(
+localStorage.getItem("neuroProgress") || "{}"
+);
+
+let p =
+progress[player] || {};
+
+if(level === "ICA"){
+return true;
+}
+
+if(level === "ACA" || level === "MCA"){
+return p["ICA"] && p["ICA"].completed === true;
+}
+
+if(level === "ACom"){
+return (
+p["ACA"] && p["ACA"].completed === true &&
+p["MCA"] && p["MCA"].completed === true
+);
+}
+
+return false;
+
+}
+
+function handleLevelClick(level){
+
+if(levelUnlocked(level)){
+
+openLevel(level);
+
+} else {
+
+alert("🔒 Complete the previous level first.");
+
+}
+
+}
 </script>
 
 </body>
