@@ -402,9 +402,34 @@ document.getElementById(
 "categorySelect"
 ).value;
 
+
+let video =
+document.getElementById(
+"introVideo"
+);
+
+
 let videoFile =
 selectedCategory +
 "_intro.mp4";
+
+
+
+video.pause();
+
+video.removeAttribute(
+"src"
+);
+
+video.load();
+
+
+document.getElementById(
+"videoContainer"
+).classList.add(
+"hidden"
+);
+
 
 
 fetch(
@@ -427,11 +452,6 @@ return;
 }
 
 
-let video =
-document.getElementById(
-"introVideo"
-);
-
 
 document.getElementById(
 "setup"
@@ -447,11 +467,13 @@ document.getElementById(
 );
 
 
+
 video.src =
 videoFile;
 
 
 video.load();
+
 
 
 video.onended =
@@ -463,10 +485,10 @@ document.getElementById(
 "hidden"
 );
 
-
 startQuiz();
 
 };
+
 
 
 video.play();
@@ -475,6 +497,12 @@ video.play();
 
 
 .catch(function(){
+
+document.getElementById(
+"videoContainer"
+).classList.add(
+"hidden"
+);
 
 startQuiz();
 
