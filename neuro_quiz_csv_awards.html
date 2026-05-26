@@ -326,7 +326,23 @@ text-shadow:
 ">
 NEURO QUEST
 </h1>
+<div id="videoContainer"
+class="hidden">
 
+<video
+id="introVideo"
+width="100%"
+controls
+>
+
+<source
+id="videoSource"
+src=""
+type="video/mp4">
+
+</video>
+
+</div>
     <div id="setup">
         <p>This quiz automatically loads questions from <strong>questions.csv</strong>.</p>
         <p class="small">Keep the CSV in the same folder as this html file when hosted.</p>
@@ -343,7 +359,12 @@ oninput="populateCategories()">
 
         <br>
 
-        <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+        <button class="start-btn"
+onclick="startIntro()">
+
+ENTER TERRITORY
+
+</button>
         <button onclick="clearLeaderboards()">
 🗑 Clear All Leaderboards
 </button>
@@ -362,9 +383,11 @@ oninput="populateCategories()">
     </div>
 
     <div id="finish" class="hidden"></div>
+    
 </div>
 
 <script>
+
 let allQuestions = [];
 let quizQuestions = [];
 let currentIndex = 0;
@@ -372,6 +395,92 @@ let score = 0;
 let selectedCategory = "";
 let playerName = "";
 
+function startIntro(){
+
+selectedCategory =
+document.getElementById(
+"categorySelect"
+).value;
+
+let videoFile =
+selectedCategory +
+"_intro.mp4";
+
+
+fetch(
+videoFile,
+{
+method:"HEAD"
+}
+)
+
+.then(function(response){
+
+if(
+!response.ok
+){
+
+startQuiz();
+
+return;
+
+}
+
+
+let video =
+document.getElementById(
+"introVideo"
+);
+
+
+document.getElementById(
+"setup"
+).classList.add(
+"hidden"
+);
+
+
+document.getElementById(
+"videoContainer"
+).classList.remove(
+"hidden"
+);
+
+
+video.src =
+videoFile;
+
+
+video.load();
+
+
+video.onended =
+function(){
+
+document.getElementById(
+"videoContainer"
+).classList.add(
+"hidden"
+);
+
+
+startQuiz();
+
+};
+
+
+video.play();
+
+})
+
+
+.catch(function(){
+
+startQuiz();
+
+});
+
+}
 fetch("questions.csv")
     .then(response => {
         if (!response.ok) throw new Error("Could not load questions.csv");
