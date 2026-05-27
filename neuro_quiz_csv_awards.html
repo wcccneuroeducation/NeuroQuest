@@ -161,6 +161,20 @@ background:#6ab04c;
 color:white;
 }
     .noaward { background: #f3f4f6; padding: 12px; border-radius: 10px; }
+  /*PC only*/
+  @media (min-width:769px){
+
+#introVideo{
+
+width:100%;
+
+max-height:95vh;
+
+object-fit:contain;
+
+}
+
+}
     /* MOBILE ONLY */
 @media (max-width: 768px) {
 .award-name {
@@ -471,11 +485,21 @@ document.getElementById(
 video.src =
 videoFile;
 
-
 video.load();
 
+setTimeout(function(){
 
+document.getElementById(
+"videoContainer"
+).scrollIntoView({
 
+behavior:"smooth",
+
+block:"start"
+
+});
+
+},300);
 video.onended =
 function(){
 
