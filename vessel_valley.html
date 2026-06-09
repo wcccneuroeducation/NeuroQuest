@@ -21,10 +21,13 @@
 
     .map-wrap {
         position: relative;
-        width: min(95vw, 650px);
-        margin: 0 auto;
+  width: min(95vw, 650px);
+  margin: 70px auto 0;
     }
-
+.map-inner {
+  position: relative;
+  transform: translateY(70px);
+}
     .base-map {
 width: 100%;
 height: auto;
@@ -33,15 +36,15 @@ display: block;
 
     .hotspot {
 position:absolute;
-border-radius:50%;
-border:none;
-background:transparent;
-padding:0;
-margin:0;
-appearance:none;
--webkit-appearance:none;
-cursor:pointer;
-z-index:3;
+  border-radius:50%;
+  border: 3px solid lime;
+  background: rgba(0,255,0,0.2);
+  padding:0;
+  margin:0;
+  appearance:none;
+  -webkit-appearance:none;
+  cursor:pointer;
+  z-index:10;
 }
 
     /* testing target areas - adjust these if needed */
@@ -49,7 +52,12 @@ z-index:3;
     .aca  { top: 42%; left: 17%; width: 12%; height: 8%; }
     .mca  { top: 40%; left: 60%; width: 12%; height: 8%; }
     .acom { top: 71%; left: 38%; width: 12%; height: 8%; }
-
+.acha { 
+   top: -1.8%;
+  left: 57%;
+  width: 11%;
+  height: 7%; 
+}
     .hotspot-label {
         position: absolute;
         background:transparent;
@@ -189,7 +197,7 @@ z-index:2;
 .acom-star-overlay{
 
 top:72.5%;
-left:38.5%;
+left:39.7%;
 
 width:9%;
 height:4.5%;
@@ -197,7 +205,21 @@ height:4.5%;
 z-index:2;
 
 }
-
+.acha-overlay {
+  top: -8%;
+  left: 32%;
+  width: 60%;
+  height: auto;
+  z-index: 2;
+}
+.acha-red-overlay,
+.acha-star-overlay {
+  top: -1.7%;
+  left: 57%;
+  width: 11.5%;
+  height: auto;
+  z-index: 3;
+}
 
 #loginBox {
 text-align:center;
@@ -225,6 +247,8 @@ margin:15px;
 <h1>Vessel Valley</h1>
 
 <div class="map-wrap">
+    <div class="map-inner">
+    
     <img src="vessel_valley.png"  class="base-map" alt="Vessel Valley map">
 <img
 src="red_overlay_ica.png"
@@ -252,17 +276,31 @@ class="course-overlay acom-overlay">
 src="blue_star_overlay_acom.png"
 class="course-overlay acom-star-overlay hidden">
 
+<img
+src="acha_island.png"
+class="course-overlay acha-overlay hidden">
+
+<img
+src="red_overlay_acha.png"
+class="course-overlay acha-red-overlay hidden">
+
+<img
+src="blue_star_overlay_acha.png"
+class="course-overlay acha-star-overlay hidden">
+
 
     <button class="hotspot ica" onclick="handleLevelClick('ICA')"></button>
 <button class="hotspot aca" onclick="handleLevelClick('ACA')"></button>
 <button class="hotspot mca" onclick="handleLevelClick('MCA')"></button>
 <button class="hotspot acom" onclick="handleLevelClick('ACom')"></button>
+<button class="hotspot acha hidden" onclick="handleLevelClick('AChA')"></button>
 
     <div class="hotspot-label ica-label">ICA</div>
     <div class="hotspot-label aca-label">ACA</div>
     <div class="hotspot-label mca-label">MCA</div>
     <div class="hotspot-label acom-label">ACom</div>
     
+</div>
 </div>
 </div>
     
@@ -420,6 +458,35 @@ document.querySelector(
 );
 
 }
+if(
+playerProgress["ACom"] &&
+playerProgress["ACom"].completed === true
+){
+  document.querySelector(".acha-overlay").classList.remove("hidden");
+  document.querySelector(".acha").classList.remove("hidden");
+}
+if(
+playerProgress["ACom"] &&
+playerProgress["ACom"].completed === true
+){
+  document.querySelector(".acha-overlay").classList.remove("hidden");
+  document.querySelector(".acha-red-overlay").classList.remove("hidden");
+  document.querySelector(".acha").classList.remove("hidden");
+}
+
+if(
+playerProgress["AChA"] &&
+playerProgress["AChA"].completed === true
+){
+  document.querySelector(".acha-red-overlay").style.display = "none";
+}
+
+if(
+playerProgress["AChA"] &&
+playerProgress["AChA"].brains === 3
+){
+  document.querySelector(".acha-star-overlay").classList.remove("hidden");
+}
 }
 function openLevel(category){
 
@@ -461,8 +528,11 @@ p["ACA"] && p["ACA"].completed === true &&
 p["MCA"] && p["MCA"].completed === true
 );
 }
-
+if(level === "AChA"){
+  return p["ACom"] && p["ACom"].completed === true;
+}
 return false;
+
 
 }
 

@@ -1,4 +1,4 @@
-﻿Category,Difficulty,QuestionGroup,Question,Answer,Explanation
+Category,Difficulty,QuestionGroup,Question,Answer,Explanation
 ACA,Beginner,1,ACA strokes may cause weakness of the leg.,TRUE,ACA supplies brain areas controlling leg movement.
 ACA,Beginner,1,ACA strokes commonly affect the face and arm more than the leg.,FALSE,ACA strokes more commonly affect the leg than the face and arm.
 ACA,Beginner,1,Leg weakness is commonly seen after ACA stroke.,TRUE,Leg weakness is a classic ACA stroke feature.
@@ -299,3 +299,43 @@ ACom,Beginner,20,ACom aneurysms are among the most common intracranial aneurysms
 ACom,Beginner,20,ACom aneurysms are rarely seen in neurovascular practice.,FALSE,ACom aneurysms are commonly encountered.
 ACom,Beginner,20,The anterior communicating artery is a frequent aneurysm location.,TRUE,ACom aneurysms are common in neuro practice.
 ACom,Beginner,20,ACom aneurysms are less relevant than cerebellar artery aneurysms in anterior circulation teaching.,FALSE,ACom is an important anterior circulation aneurysm site.
+AChA,Beginner,1,"AChA strokes may cause weakness affecting the face, arm, and leg.",True,"The AChA supplies structures including the internal capsule, where motor fibres are concentrated."
+AChA,Beginner,1,AChA strokes typically affect only the leg.,False,"Weakness can affect the face, arm, and leg together."
+AChA,Beginner,1,Dense weakness may occur following an AChA stroke.,True,Small lesions can affect many motor fibres in the internal capsule.
+AChA,Beginner,1,Motor symptoms are uncommon after AChA stroke.,False,Weakness is a common feature of AChA stroke.
+AChA,Beginner,2,AChA strokes may cause sensory loss on one side of the body.,True,Sensory pathways travel through regions supplied by the AChA.
+AChA,Beginner,2,Sensory symptoms are rarely seen in AChA stroke.,False,Sensory loss is a recognised feature of AChA injury.
+AChA,Beginner,2,An AChA stroke may affect both movement and sensation.,True,Motor and sensory fibres run close together in the internal capsule.
+AChA,Beginner,2,AChA strokes affect sensation without affecting movement.,False,Both motor and sensory deficits may occur.
+AChA,Beginner,3,AChA strokes may cause loss of vision on one side of the visual field.,True,Visual pathways supplied by the AChA may be affected.
+AChA,Beginner,3,Visual symptoms never occur following AChA stroke.,False,Visual field defects are a recognised feature.
+AChA,Beginner,3,An AChA stroke may affect a person's vision on one side.,True,Damage to optic pathways can produce this pattern.
+AChA,Beginner,3,AChA strokes commonly cause double vision as their main symptom.,False,Visual field loss is more characteristic than diplopia.
+AChA,Beginner,4,AChA is a relatively small artery.,True,"Despite its size, it supplies important deep brain structures."
+AChA,Beginner,4,AChA is one of the largest arteries in the brain.,False,It is a small but clinically important vessel.
+AChA,Beginner,4,A small AChA stroke may produce significant symptoms.,True,Important motor and sensory fibres pass through its territory.
+AChA,Beginner,4,Small AChA strokes are always symptom-free.,False,Even small lesions can cause major deficits.
+AChA,Beginner,5,The internal capsule is commonly affected by AChA stroke.,True,The internal capsule is one of the key structures supplied by the AChA.
+AChA,Beginner,5,AChA strokes mainly affect the cerebellum.,False,The cerebellum is supplied by posterior circulation vessels.
+AChA,Beginner,5,Damage to the internal capsule may affect multiple body regions at once.,True,"Motor fibres for the face, arm, and leg are closely packed."
+AChA,Beginner,5,Internal capsule injury usually affects only a single finger.,False,Deficits are often much broader than this.
+AChA,Beginner,6,"AChA strokes may affect the face, arm, and leg on the same side of the body.",False,Symptoms typically occur on the opposite side of the body.
+AChA,Beginner,6,AChA strokes often produce symptoms on the opposite side of the body.,True,Motor and sensory pathways cross before reaching the limbs.
+AChA,Beginner,6,Weakness from an AChA stroke is usually contralateral to the lesion.,True,Internal capsule involvement causes opposite-sided weakness.
+AChA,Beginner,6,AChA strokes always cause symptoms on the same side as the lesion.,False,Symptoms are usually contralateral.
+AChA,Beginner,7,"AChA stroke may produce a combination of weakness, sensory loss, and visual problems.",True,All three pathways can be affected.
+AChA,Beginner,7,AChA strokes affect only a single neurological function.,False,Multiple pathways may be involved.
+AChA,Beginner,7,"Motor, sensory, and visual deficits can occur together in AChA stroke.",True,This is a classic AChA stroke pattern.
+AChA,Beginner,7,Visual symptoms exclude the diagnosis of AChA stroke.,False,Visual deficits may be part of the syndrome.
+AChA,Beginner,8,AChA arises from the internal carotid artery.,True,The AChA is a branch of the ICA.
+AChA,Beginner,8,AChA usually arises from the basilar artery.,False,It originates from the ICA.
+AChA,Beginner,8,AChA is part of the anterior circulation.,True,It branches from the internal carotid artery.
+AChA,Beginner,8,AChA is part of the vertebral artery system.,False,It belongs to the anterior circulation.
+AChA,Beginner,9,AChA aneurysms may affect nearby visual pathways.,True,The artery lies near important optic structures.
+AChA,Beginner,9,AChA aneurysms are commonly associated with cerebellar symptoms only.,False,Visual and motor pathways are more relevant.
+AChA,Beginner,9,Preserving AChA flow during aneurysm treatment is important.,True,Occlusion can cause significant neurological deficits.
+AChA,Beginner,9,Loss of AChA flow is usually clinically insignificant.,False,It can produce major disability.
+AChA,Beginner,10,AChA strokes may produce dense neurological deficits despite a small lesion.,True,Many important fibres pass through a small area.
+AChA,Beginner,10,Large areas of cortex must be damaged before symptoms occur in AChA stroke.,False,Deep fibre tracts can produce severe symptoms even with small lesions.
+AChA,Beginner,10,Closely packed fibre tracts help explain the severity of some AChA strokes.,True,Many pathways travel together in the internal capsule.
+AChA,Beginner,10,The effects of AChA stroke are always mild.,False,Deficits may be severe and disabling.
