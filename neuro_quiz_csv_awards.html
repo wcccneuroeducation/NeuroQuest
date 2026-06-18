@@ -853,6 +853,21 @@ playerName,
 "ACom"
 );
 }
+
+}
+if(
+selectedCategory==="ACom"
+&&
+percent>=80
+){
+
+saveUnlock(
+playerName,
+"ACom",
+"AChA"
+);
+
+
 }
 
 
@@ -1055,6 +1070,7 @@ function isUnlocked(playerName, category){
     progress[playerName][category];
 
 }
+
 function goHome(){
 
     document.getElementById("finish").classList.add("hidden");
