@@ -354,7 +354,7 @@ margin:15px;
     <img src="vessel_valley.png"  class="base-map" alt="Vessel Valley map">
     <img
 src="vessel_valley_wave1.png"
-class="course-overlay csf-wave-1 hidden">
+class="course-overlay csf-wave-1">
 <img
 
 src="red_overlay_ica.png"
@@ -387,7 +387,7 @@ src="acha_island.png"
 class="course-overlay acha-overlay hidden">
 <img
 src="acha_island_wave1.png"
-class="course-overlay acha-wave-1 ">
+class="course-overlay acha-wave-1 hidden">
 <img
 src="red_overlay_acha.png"
 class="course-overlay acha-red-overlay hidden">
@@ -583,6 +583,7 @@ playerProgress["ACom"] &&
 playerProgress["ACom"].completed === true
 ){
   document.querySelector(".acha-overlay").classList.remove("hidden");
+    document.querySelector(".acha-wave-1").classList.remove("hidden");
   document.querySelector(".acha-red-overlay").classList.remove("hidden");
   document.querySelector(".acha").classList.remove("hidden");
 }
