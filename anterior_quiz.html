@@ -318,6 +318,36 @@ z-index:
 }
 */
 }
+
+#welcomeBox {
+  margin: 20px auto 10px;
+  text-align: center;
+}
+
+#welcomeText {
+  color: #00ffff;
+  font-size: 26px;
+  font-weight: bold;
+  text-shadow:
+    0 0 8px #00ffff,
+    0 0 16px #ff00ff;
+  margin: 10px 0;
+}
+
+#loginBtn {
+  background: #e2e8f0;
+}
+
+#signOutBtn {
+  background: transparent;
+  color: #00ffff;
+  border: 1px solid #00ffff;
+  font-size: 16px;
+  padding: 10px 18px;
+  margin: 8px;
+  box-shadow: 0 0 10px rgba(0,255,255,0.3);
+}
+
 </style>
 </head>
 <body>
@@ -367,8 +397,14 @@ type="video/mp4">
 
         <br>
 
-        <label for="playerName">Signed in as:</label>
-        <input id="playerName" placeholder="Google login required" readonly>
+        <div id="welcomeBox" class="hidden">
+          <h3 id="welcomeText"></h3>
+          <button id="signOutBtn" onclick="logout()">Sign Out</button>
+        </div>
+
+        <button id="loginBtn" class="start-btn" onclick="googleLogin()">
+          Sign in with Google
+        </button>
 
         <br>
 
@@ -407,7 +443,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
@@ -458,20 +495,31 @@ window.googleLogin = async function () {
 onAuthStateChanged(auth, async user => {
   currentUser = user;
 
+  const loginBtn = document.getElementById("loginBtn");
+  const welcomeBox = document.getElementById("welcomeBox");
+  const welcomeText = document.getElementById("welcomeText");
+
   if (!user) {
     playerName = "";
+
+    if (loginBtn) loginBtn.classList.remove("hidden");
+    if (welcomeBox) welcomeBox.classList.add("hidden");
+
     document.getElementById("loadStatus").innerHTML =
       "Please sign in with Google to start Anterior Isle.";
-    addLoginButton();
+
     return;
   }
 
   playerName = user.displayName || "NeuroQuest Player";
 
-  const nameBox = document.getElementById("playerName");
-  if (nameBox) {
-    nameBox.value = playerName;
-    nameBox.readOnly = true;
+  if (loginBtn) loginBtn.classList.add("hidden");
+
+  if (welcomeBox) welcomeBox.classList.remove("hidden");
+
+  if (welcomeText) {
+    welcomeText.textContent =
+      "Welcome back, " + playerName;
   }
 
   await set(ref(db, `${APP_ROOT}/users/${user.uid}`), {
@@ -482,23 +530,33 @@ onAuthStateChanged(auth, async user => {
 
   await loadProgress();
 
+  document.getElementById("loadStatus").innerHTML =
+    "✅ Signed in. Choose a territory to begin.";
+
   if (allQuestions.length > 0) {
     populateCategories();
   }
 });
 
+window.logout = async function () {
+  try {
+    await signOut(auth);
+    leaderboardCache = {};
+    playerProgress = {};
+  } catch (err) {
+    console.error(err);
+    alert("Sign out failed. Check console.");
+  }
+};
+
 function addLoginButton() {
-  const setup = document.getElementById("setup");
+  const loginBtn = document.getElementById("loginBtn");
+  const welcomeBox = document.getElementById("welcomeBox");
 
-  if (document.getElementById("googleLoginBtn")) return;
-
-  const btn = document.createElement("button");
-  btn.id = "googleLoginBtn";
-  btn.className = "start-btn";
-  btn.textContent = "Sign in with Google";
-  btn.onclick = window.googleLogin;
-
-  setup.prepend(btn);
+  if (!currentUser) {
+    if (loginBtn) loginBtn.classList.remove("hidden");
+    if (welcomeBox) welcomeBox.classList.add("hidden");
+  }
 }
 
 async function loadProgress() {
