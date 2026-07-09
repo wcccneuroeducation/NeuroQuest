@@ -244,14 +244,22 @@ th:nth-child(5),
 td:nth-child(5) {
 
 width:
+14%;
+
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+
+width:
 32%;
 
 }
 
 /* hide date on mobile */
 
-th:nth-child(6),
-td:nth-child(6) {
+th:nth-child(7),
+td:nth-child(7) {
 
 display:
 none;
@@ -946,8 +954,23 @@ async function saveScoreToLeaderboard(
   const bestRef = ref(db, `${APP_ROOT}/leaderboards/${category}/${currentUser.uid}`);
   const oldSnap = await get(bestRef);
 
-  if (!oldSnap.exists() || percent > (oldSnap.val().percent || 0)) {
+  const oldScore = oldSnap.exists() ? oldSnap.val() : null;
+
+  if (
+    !oldScore ||
+    percent > (oldScore.percent || 0) ||
+    (
+      percent === (oldScore.percent || 0) &&
+      scoreValue > (oldScore.score || 0)
+    ) ||
+    (
+      percent === (oldScore.percent || 0) &&
+      scoreValue === (oldScore.score || 0) &&
+      durationSeconds < (oldScore.durationSeconds || 999999)
+    )
+  ) {
     await set(bestRef, scoreData);
+    leaderboardCache[category] = null;
   }
 
   await push(
@@ -973,12 +996,28 @@ async function getScoresForCategory(category) {
   const scores = Object.values(snap.val())
     .sort((a, b) => {
       return (b.percent || 0) - (a.percent || 0) ||
-             (b.score || 0) - (a.score || 0);
+             (b.score || 0) - (a.score || 0) ||
+             (a.durationSeconds || 999999) - (b.durationSeconds || 999999);
     })
     .slice(0, 20);
 
   leaderboardCache[category] = scores;
   return scores;
+}
+
+function formatDuration(seconds) {
+  seconds = Number(seconds || 0);
+
+  if (!seconds) return "-";
+
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+
+  if (mins <= 0) {
+    return secs + "s";
+  }
+
+  return mins + "m " + String(secs).padStart(2, "0") + "s";
 }
 
 async function renderLeaderboard(category) {
@@ -991,7 +1030,7 @@ async function renderLeaderboard(category) {
   let html =
     "<h2>" + category + " Leaderboard</h2>" +
     "<table>" +
-    "<tr><th>Rank</th><th>Name</th><th>Score</th><th>%</th><th>Award</th><th>Date</th></tr>";
+    "<tr><th>Rank</th><th>Name</th><th>Score</th><th>%</th><th>Time</th><th>Award</th><th>Date</th></tr>";
 
   scores.forEach((s, index) => {
     html += "<tr>" +
@@ -999,6 +1038,7 @@ async function renderLeaderboard(category) {
       "<td>" + escapeHTML(s.name || "Player") + "</td>" +
       "<td>" + (s.score || 0) + "/" + (s.total || 0) + "</td>" +
       "<td>" + (s.percent || 0) + "%</td>" +
+      "<td>" + formatDuration(s.durationSeconds) + "</td>" +
       "<td class='award-cell'>" + (s.awardEmoji || "") + "<br><span class='award-name'>" + escapeHTML(s.awardName || "") + "</span></td>" +
       "<td>" + escapeHTML(s.date || "") + "</td>" +
       "</tr>";
