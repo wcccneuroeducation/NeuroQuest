@@ -1051,24 +1051,22 @@ function saveUnlock(playerName, category, unlockedCategory){
 
 }
 
-
 function isUnlocked(playerName, category){
+
+    if(category === "ICA"){
+        return true;
+    }
 
     let progress =
     JSON.parse(
-    localStorage.getItem(
-    "neuroProgress"
-    ) || "{}"
+    localStorage.getItem("neuroProgress") || "{}"
     );
 
-    if(category==="ICA"){
-        return true; // ICA always open
-    }
+    let levelProgress =
+    progress[playerName] && progress[playerName][category];
 
-    return progress[playerName]
-    &&
-    progress[playerName][category];
-
+    return levelProgress === true ||
+           (levelProgress && levelProgress.completed === true);
 }
 
 function goHome(){
