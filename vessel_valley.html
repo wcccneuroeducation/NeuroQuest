@@ -633,17 +633,20 @@ return true;
 }
 
 if(level === "ACA" || level === "MCA"){
-return p["ICA"] && p["ICA"].completed === true;
+  return p["ICA"] === true ||
+         (p["ICA"] && p["ICA"].completed === true);
 }
 
 if(level === "ACom"){
-return (
-p["ACA"] && p["ACA"].completed === true &&
-p["MCA"] && p["MCA"].completed === true
-);
+  return (
+    (p["ACA"] === true || (p["ACA"] && p["ACA"].completed === true)) &&
+    (p["MCA"] === true || (p["MCA"] && p["MCA"].completed === true))
+  );
 }
+
 if(level === "AChA"){
-  return p["ACom"] && p["ACom"].completed === true;
+  return p["ACom"] === true ||
+         (p["ACom"] && p["ACom"].completed === true);
 }
 return false;
 
