@@ -480,6 +480,8 @@ let playerName = "";
 let currentUser = null;
 let playerProgress = {};
 let leaderboardCache = {};
+let quizStartedAt = null;
+let quizStartedAtMs = null;
 
 window.googleLogin = async function () {
   const provider = new GoogleAuthProvider();
@@ -761,6 +763,9 @@ function isUnlocked(category) {
 }
 
 function startQuiz() {
+  quizStartedAtMs = Date.now();
+  quizStartedAt = new Date().toISOString();
+
   selectedCategory = document.getElementById("categorySelect").value;
   playerName = currentUser?.displayName || "NeuroQuest Player";
 
@@ -836,8 +841,30 @@ async function finishQuiz() {
   let percent = Math.round((score / quizQuestions.length) * 100);
   let award = getAward(percent);
 
+  const quizFinishedAt = new Date().toISOString();
+  const rawDurationSeconds = quizStartedAtMs
+    ? Math.round((Date.now() - quizStartedAtMs) / 1000)
+    : 0;
+
+  const durationSeconds = Math.min(
+    Math.max(rawDurationSeconds, 30),
+    1800
+  );
+
+  const durationMinutes = Math.round((durationSeconds / 60) * 10) / 10;
+
   await saveLevelProgress(selectedCategory, award, score, quizQuestions.length, percent);
-  await saveScoreToLeaderboard(selectedCategory, score, quizQuestions.length, percent, award);
+  await saveScoreToLeaderboard(
+    selectedCategory,
+    score,
+    quizQuestions.length,
+    percent,
+    award,
+    quizStartedAt,
+    quizFinishedAt,
+    durationSeconds,
+    durationMinutes
+  );
 
   let finishHTML =
     "<h2>Finished</h2>" +
@@ -885,7 +912,17 @@ async function saveLevelProgress(level, award, scoreValue, total, percent) {
   );
 }
 
-async function saveScoreToLeaderboard(category, scoreValue, total, percent, award) {
+async function saveScoreToLeaderboard(
+  category,
+  scoreValue,
+  total,
+  percent,
+  award,
+  startedAt,
+  finishedAt,
+  durationSeconds,
+  durationMinutes
+) {
   if (!currentUser) return;
 
   const scoreData = {
@@ -899,6 +936,10 @@ async function saveScoreToLeaderboard(category, scoreValue, total, percent, awar
     awardEmoji: award.emoji,
     brains: award.brains,
     date: new Date().toLocaleString(),
+    startedAt: startedAt,
+    finishedAt: finishedAt,
+    durationSeconds: durationSeconds,
+    durationMinutes: durationMinutes,
     updatedAt: new Date().toISOString()
   };
 
