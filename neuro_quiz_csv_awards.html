@@ -281,7 +281,8 @@ height:90px;
 
 }
 
-
+/* Mobile CSS Active Badge */
+/*
 body::after {
 
 content:
@@ -315,7 +316,7 @@ z-index:
 9999;
 
 }
-
+*/
 }
 </style>
 </head>
@@ -1089,10 +1090,18 @@ document.getElementById("playerName").value = savedPlayer;
 });
 function returnToMap(){
 
-window.location.href =
-localStorage.getItem("currentMap")
-||
-"vessel_valley.html";
+  const player =
+    localStorage.getItem("currentPlayer") ||
+    playerName ||
+    document.getElementById("playerName").value.trim();
+
+  if(player){
+    localStorage.setItem("currentPlayer", player);
+  }
+
+  localStorage.setItem("currentMap", "vessel_valley.html");
+
+  window.location.href = "vessel_valley.html";
 
 }
 
