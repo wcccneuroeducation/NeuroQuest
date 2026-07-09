@@ -337,19 +337,14 @@ margin:15px;
 </head>
 <body>
 <div id="loginBox">
-  <h2>Enter NeuroQuest</h2>
-  <input id="playerInput" placeholder="Enter name">
-  <br>
-  <button onclick="savePlayer()">Enter Anterior Isle</button>
+  <h2>Enter Anterior Isle</h2>
+  <button onclick="googleLogin()">Sign in with Google</button>
 </div>
 
 <div id="mapBox" class="hidden">
   <!-- your vessel valley image and hotspot buttons are here -->
 
 <h1>Anterior Isle</h1>
-<button onclick="googleLogin()">
-  Sign in with Google
-</button>
 <div class="map-wrap">
     <div class="map-inner">
     
@@ -421,263 +416,23 @@ class="course-overlay acha-star-overlay hidden">
     
 
 
-<script>
-    let playerName =
-localStorage.getItem("currentPlayer") || "";
-
-window.onload = function(){
-
-    if(playerName){
-        document.getElementById("loginBox").classList.add("hidden");
-        document.getElementById("mapBox").classList.remove("hidden");
-        updateMapProgress();
-    }
-
-};
-
-function savePlayer(){
-
-    let enteredName =
-    document.getElementById("playerInput").value.trim();
-    
-
-    if(!enteredName){
-        alert("Please enter your name first");
-        return;
-    }
-
-    localStorage.setItem("currentPlayer", enteredName);
-
-    playerName = enteredName;
-
-    document.getElementById("loginBox").classList.add("hidden");
-    document.getElementById("mapBox").classList.remove("hidden");
-updateMapProgress();
-
-}
-
-function openLevel(level){
-
-    window.location.href =
-    "neuro_quiz_csv_awards.html?category="
-    + level;
-
-}
-function openLevel(category) {
-    window.location.href = "neuro_quiz_csv_awards.html?category=" + encodeURIComponent(category);
-}
-/* Test deleted now - this was just to check the locking mechanism works
-if(!isUnlocked(playerName,"ACA")){
-    document.querySelector(".aca")
-      .classList.add("locked");
-}
-      */
-function updateMapProgress(){
-
-let playerName =
-localStorage.getItem("currentPlayer");
-
-let progress =
-JSON.parse(
-localStorage.getItem("neuroProgress") || "{}"
-);
-
-let playerProgress =
-progress[playerName] || {};
-
-if(
-playerProgress["ICA"] &&
-playerProgress["ICA"].completed === true
-){
-
-document.querySelector(".ica-overlay").style.display =
-"none";
-
-}
-
-if(
-playerProgress["ICA"] &&
-playerProgress["ICA"].brains === 3
-){
-
-document.querySelector(".ica-star-overlay").classList.remove("hidden");
-
-}
-if(
-playerProgress["ACA"] &&
-playerProgress["ACA"].completed === true
-){
-
-document.querySelector(
-".aca-overlay"
-).style.display =
-"none";
-
-}
-
-if(
-playerProgress["ACA"] &&
-playerProgress["ACA"].brains === 3
-){
-
-document.querySelector(".aca-star-overlay")
-.classList.remove("hidden");
-
-}
-if(
-playerProgress["MCA"] &&
-playerProgress["MCA"].completed === true
-){
-
-document.querySelector(
-".mca-overlay"
-).style.display =
-"none";
-
-}
-
-
-if(
-playerProgress["MCA"] &&
-playerProgress["MCA"].brains === 3
-){
-
-document.querySelector(
-".mca-star-overlay"
-).classList.remove(
-"hidden"
-);
-
-}
-if(
-playerProgress["ACom"] &&
-playerProgress["ACom"].completed === true
-){
-
-document.querySelector(
-".acom-overlay"
-).style.display =
-"none";
-
-}
-
-if(
-playerProgress["ACom"] &&
-playerProgress["ACom"].brains === 3
-){
-
-document.querySelector(
-".acom-star-overlay"
-).classList.remove(
-"hidden"
-);
-
-}
-if(
-playerProgress["ACom"] &&
-playerProgress["ACom"].completed === true
-){
-  document.querySelector(".acha-overlay").classList.remove("hidden");
-  document.querySelector(".acha").classList.remove("hidden");
-}
-if(
-playerProgress["ACom"] &&
-playerProgress["ACom"].completed === true
-){
-  document.querySelector(".acha-overlay").classList.remove("hidden");
-    document.querySelector(".acha-wave-1").classList.remove("hidden");
-  document.querySelector(".acha-red-overlay").classList.remove("hidden");
-  document.querySelector(".acha").classList.remove("hidden");
-}
-
-if(
-playerProgress["AChA"] &&
-playerProgress["AChA"].completed === true
-){
-  document.querySelector(".acha-red-overlay").style.display = "none";
-}
-
-if(
-playerProgress["AChA"] &&
-playerProgress["AChA"].brains === 3
-){
-  document.querySelector(".acha-star-overlay").classList.remove("hidden");
-}
-}
-function openLevel(category){
-
-localStorage.setItem(
-"currentMap",
-"vessel_valley.html"
-);
-
-window.location.href =
-"neuro_quiz_csv_awards.html?category="
-+
-encodeURIComponent(category);
-
-}
-function levelUnlocked(level){
-
-let player =
-localStorage.getItem("currentPlayer");
-
-let progress =
-JSON.parse(
-localStorage.getItem("neuroProgress") || "{}"
-);
-
-let p =
-progress[player] || {};
-
-if(level === "ICA"){
-return true;
-}
-
-if(level === "ACA" || level === "MCA"){
-  return p["ICA"] === true ||
-         (p["ICA"] && p["ICA"].completed === true);
-}
-
-if(level === "ACom"){
-  return (
-    (p["ACA"] === true || (p["ACA"] && p["ACA"].completed === true)) &&
-    (p["MCA"] === true || (p["MCA"] && p["MCA"].completed === true))
-  );
-}
-
-if(level === "AChA"){
-  return p["ACom"] === true ||
-         (p["ACom"] && p["ACom"].completed === true);
-}
-return false;
-
-
-}
-
-function handleLevelClick(level){
-
-if(levelUnlocked(level)){
-
-openLevel(level);
-
-} else {
-
-alert("🔒 Complete the previous level first.");
-
-}
-
-}
-</script>
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+  getDatabase,
+  ref,
+  get,
+  set
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQOx2eQRwPFlHC2EmQREtdFYb9Mha7zuQ",
@@ -691,37 +446,153 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getDatabase(app);
+
+const APP_ROOT = "neuroQuest";
+
+let currentUser = null;
+let playerProgress = {};
 
 window.googleLogin = async function () {
-
   const provider = new GoogleAuthProvider();
 
   try {
-
-    const result = await signInWithPopup(auth, provider);
-
-    alert(
-      "Welcome " +
-      result.user.displayName
-    );
-
+    await signInWithPopup(auth, provider);
   } catch (err) {
-
     console.error(err);
-
+    alert("Login failed. Check console.");
   }
-
 };
 
-onAuthStateChanged(auth, user => {
-
-  if (user) {
-
-    console.log("Logged in:", user.displayName);
-
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    currentUser = null;
+    document.getElementById("loginBox").classList.remove("hidden");
+    document.getElementById("mapBox").classList.add("hidden");
+    return;
   }
 
+  currentUser = user;
+
+  await set(ref(db, `${APP_ROOT}/users/${user.uid}`), {
+    displayName: user.displayName,
+    email: user.email,
+    lastLogin: new Date().toISOString()
+  });
+
+  await loadProgress();
+
+  document.getElementById("loginBox").classList.add("hidden");
+  document.getElementById("mapBox").classList.remove("hidden");
+
+  updateMapProgress();
 });
+
+async function loadProgress() {
+  const snap = await get(
+    ref(db, `${APP_ROOT}/progress/${currentUser.uid}`)
+  );
+
+  playerProgress = snap.exists() ? snap.val() : {};
+
+  if (!playerProgress.ICA) {
+    playerProgress.ICA = {
+      unlocked: true,
+      completed: false,
+      brains: 0
+    };
+  }
+}
+
+function isCompleted(level) {
+  return playerProgress[level] &&
+         playerProgress[level].completed === true;
+}
+
+function levelUnlocked(level) {
+  if (level === "ICA") return true;
+
+  if (level === "ACA" || level === "MCA") {
+    return isCompleted("ICA");
+  }
+
+  if (level === "ACom") {
+    return isCompleted("ACA") && isCompleted("MCA");
+  }
+
+  if (level === "AChA") {
+    return isCompleted("ACom");
+  }
+
+  return false;
+}
+
+window.handleLevelClick = function(level) {
+  if (!currentUser) {
+    alert("Please sign in first.");
+    return;
+  }
+
+  if (levelUnlocked(level)) {
+    openLevel(level);
+  } else {
+    alert("🔒 Complete the previous level first.");
+  }
+};
+
+function openLevel(category) {
+  window.location.href =
+    "anterior_quiz.html?category=" +
+    encodeURIComponent(category);
+}
+
+function updateMapProgress() {
+
+  if (isCompleted("ICA")) {
+    document.querySelector(".ica-overlay").style.display = "none";
+  }
+
+  if (playerProgress.ICA && playerProgress.ICA.brains === 3) {
+    document.querySelector(".ica-star-overlay").classList.remove("hidden");
+  }
+
+  if (isCompleted("ACA")) {
+    document.querySelector(".aca-overlay").style.display = "none";
+  }
+
+  if (playerProgress.ACA && playerProgress.ACA.brains === 3) {
+    document.querySelector(".aca-star-overlay").classList.remove("hidden");
+  }
+
+  if (isCompleted("MCA")) {
+    document.querySelector(".mca-overlay").style.display = "none";
+  }
+
+  if (playerProgress.MCA && playerProgress.MCA.brains === 3) {
+    document.querySelector(".mca-star-overlay").classList.remove("hidden");
+  }
+
+  if (isCompleted("ACom")) {
+    document.querySelector(".acom-overlay").style.display = "none";
+
+    document.querySelector(".acha-overlay").classList.remove("hidden");
+    document.querySelector(".acha-wave-1").classList.remove("hidden");
+    document.querySelector(".acha-red-overlay").classList.remove("hidden");
+    document.querySelector(".acha").classList.remove("hidden");
+  }
+
+  if (playerProgress.ACom && playerProgress.ACom.brains === 3) {
+    document.querySelector(".acom-star-overlay").classList.remove("hidden");
+  }
+
+  if (isCompleted("AChA")) {
+    document.querySelector(".acha-red-overlay").style.display = "none";
+  }
+
+  if (playerProgress.AChA && playerProgress.AChA.brains === 3) {
+    document.querySelector(".acha-star-overlay").classList.remove("hidden");
+  }
+}
 
 </script>
 </body>
