@@ -6,14 +6,23 @@
 
 <title>Anterior Isle</title>
 <style>
-    body {
-        margin: 0;
-        padding: 20px;
-        background: #ffffff;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        color: #111;
-    }
+   body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px;
+
+    background:
+      radial-gradient(
+        circle at top,
+        #21486e 0%,
+        #10253f 40%,
+        #050b15 100%
+      );
+
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #ffffff;
+}
 
     h1 {
         margin: 10px 0 20px;
@@ -323,9 +332,369 @@ z-index:2;
   z-index: 4;
 }
 
+/* ===== Neuro Quest dashboard header ===== */
+#mapBox {
+  width: 100%;
+}
+
+.quest-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  margin: -20px -20px 24px;
+  padding: 18px 28px;
+
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto;
+  gap: 18px;
+  align-items: center;
+
+  background: rgba(3, 10, 22, 0.92);
+  border-bottom: 1px solid rgba(107,232,255,0.22);
+  box-shadow: 0 0 24px rgba(0,0,0,0.45);
+  backdrop-filter: blur(10px);
+}
+
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+}
+
+.brand-icon {
+  font-size: 42px;
+  filter: drop-shadow(0 0 8px rgba(107,232,255,0.55));
+}
+
+.brand-title {
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.brand-title span {
+  color: #47f3ff;
+  text-shadow: 0 0 10px rgba(71,243,255,0.45);
+}
+
+.brand-tagline {
+  font-size: 13px;
+  color: #d9e7ff;
+  letter-spacing: 1px;
+  margin-top: 3px;
+}
+
+.isle-block {
+  text-align: left;
+  border-left: 1px solid rgba(107,232,255,0.25);
+  padding-left: 22px;
+}
+
+.isle-title {
+  font-size: clamp(24px, 3vw, 42px);
+  font-weight: 800;
+}
+
+.isle-subtitle {
+  margin-top: 4px;
+  font-size: 18px;
+  color: #e8f2ff;
+}
+
+.isle-subtitle strong {
+  color: #47f3ff;
+}
+
+.stats-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.stat-card {
+  min-width: 135px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(7, 22, 42, 0.82);
+  border: 1px solid rgba(107,232,255,0.22);
+  box-shadow: inset 0 0 18px rgba(107,232,255,0.04);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #47f3ff;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.stat-note {
+  margin-top: 4px;
+  color: #d9e7ff;
+  font-size: 13px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 9px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: rgba(120,160,190,0.2);
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #47f3ff, #9b5cff);
+  box-shadow: 0 0 12px rgba(71,243,255,0.5);
+}
+
+.map-intro {
+  color: #47f3ff;
+  font-size: 21px;
+  margin: 10px auto -30px;
+  max-width: 800px;
+  text-shadow: 0 0 8px rgba(71,243,255,0.22);
+}
+
+.map-actions {
+  position: fixed;
+  right: 28px;
+  top: 220px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.action-card {
+  min-width: 210px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(7, 22, 42, 0.84);
+  border: 1px solid rgba(107,232,255,0.35);
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 0 14px rgba(71,243,255,0.12);
+}
+
+.action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(71,243,255,0.35);
+}
+
+.action-icon {
+  font-size: 28px;
+}
+
+.action-title {
+  font-weight: 800;
+  text-align: left;
+}
+
+.action-subtitle {
+  font-size: 13px;
+  color: #d9e7ff;
+  text-align: left;
+}
+
+.vessel-status {
+  position: fixed;
+  left: 28px;
+  top: 220px;
+  z-index: 900;
+  width: 230px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(7, 22, 42, 0.84);
+  border: 1px solid rgba(107,232,255,0.22);
+  box-shadow: 0 0 14px rgba(71,243,255,0.08);
+  text-align: left;
+}
+
+.vessel-status h3 {
+  margin: 0 0 16px;
+  color: #47f3ff;
+}
+
+.vessel-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(107,232,255,0.12);
+}
+
+.vessel-brains {
+  white-space: nowrap;
+}
+
+.locked-text {
+  color: #9aa7bb;
+}
+
+@media (max-width: 1100px) {
+  .map-actions, .vessel-status {
+    position: static;
+    width: auto;
+    margin: 16px auto;
+    max-width: 650px;
+  }
+
+  .map-actions {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 12px;
+  }
+
+  .quest-header {
+    margin: -12px -12px 18px;
+    padding: 14px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .brand-icon {
+    font-size: 32px;
+  }
+
+  .brand-title {
+    font-size: 26px;
+  }
+
+  .brand-tagline {
+    font-size: 11px;
+  }
+
+  .isle-block {
+    border-left: none;
+    padding-left: 0;
+    text-align: left;
+  }
+
+  .isle-title {
+    font-size: 28px;
+  }
+
+  .isle-subtitle {
+    font-size: 15px;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-card {
+    min-width: 0;
+    padding: 10px;
+  }
+
+  .stat-card.progress-stat {
+    grid-column: 1 / -1;
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+
+  .map-intro {
+    font-size: 16px;
+    margin: 4px auto -42px;
+  }
+
+  .map-wrap {
+    width: min(100vw, 650px);
+    margin-top: 50px;
+  }
+
+  .map-inner {
+    transform: translateY(35px);
+  }
+
+  .action-card {
+    min-width: 135px;
+    flex: 1;
+  }
+}
+
 #loginBox {
-text-align:center;
-margin-top:40px;
+    max-width: 500px;
+    margin: 80px auto;
+
+    padding: 35px;
+
+    background: rgba(8,18,35,0.92);
+
+    border: 1px solid rgba(0,255,255,0.35);
+    border-radius: 24px;
+
+    box-shadow:
+      0 0 20px rgba(0,255,255,0.15),
+      inset 0 0 20px rgba(0,255,255,0.05);
+
+    backdrop-filter: blur(6px);
+}
+
+#loginBox h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: clamp(36px, 6vw, 52px);
+
+    color: #6be8ff;
+
+    text-shadow:
+      0 0 8px rgba(107,232,255,0.6),
+      0 0 18px rgba(107,232,255,0.35);
+}
+
+#loginSubtitle {
+    color: #b9dfff;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.google-btn {
+    background: linear-gradient(
+      180deg,
+      #1a8cff,
+      #0066ff
+    );
+
+    color: white;
+    border: none;
+
+    padding: 14px 28px;
+    border-radius: 999px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.google-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0,150,255,0.5);
 }
 
 #playerInput {
@@ -337,14 +706,82 @@ margin:15px;
 </head>
 <body>
 <div id="loginBox">
-  <h2>Enter Anterior Isle</h2>
-  <button onclick="googleLogin()">Sign in with Google</button>
+
+  <h2>Neuro Quest</h2>
+
+  <div id="loginSubtitle">
+    People learn because they are curious,<br>
+    not because they are told to remember.
+  </div>
+
+  <button class="google-btn" onclick="googleLogin()">
+    Sign in with Google
+  </button>
+
 </div>
 
 <div id="mapBox" class="hidden">
-  <!-- your vessel valley image and hotspot buttons are here -->
 
-<h1>Anterior Isle</h1>
+<header class="quest-header">
+  <div class="brand-block">
+    <div class="brand-icon">🧠</div>
+    <div>
+      <div class="brand-title">NEURO <span>QUEST</span></div>
+      <div class="brand-tagline">KNOWLEDGE • PATIENTS • IMPACT</div>
+    </div>
+  </div>
+
+  <div class="isle-block">
+    <div class="isle-title">Anterior Isle</div>
+    <div class="isle-subtitle"><strong id="completedCount">0 / 5</strong> Vessels Completed</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Brains Earned</div>
+      <div class="stat-value">🧠 <span id="totalBrains">0</span></div>
+      <div class="stat-note">Total Brains</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Brain Level</div>
+      <div class="stat-value">Level <span id="brainLevel">1</span></div>
+      <div class="stat-note"><span id="brainXp">0</span> / 100 XP</div>
+      <div class="progress-bar"><div id="xpFill" class="progress-fill"></div></div>
+    </div>
+
+    <div class="stat-card progress-stat">
+      <div class="stat-label">Island Progress</div>
+      <div class="stat-value"><span id="islandProgress">0</span>%</div>
+      <div class="progress-bar"><div id="islandFill" class="progress-fill"></div></div>
+      <div class="stat-note">Mastered</div>
+    </div>
+  </div>
+</header>
+
+<div class="map-intro">Explore the vessels of the Anterior Circulation and earn Brains</div>
+
+<div class="vessel-status">
+  <h3>Vessel Status</h3>
+  <div class="vessel-row"><span>ICA</span><span id="statusICA" class="vessel-brains">🔓</span></div>
+  <div class="vessel-row"><span>ACA</span><span id="statusACA" class="vessel-brains">🔒</span></div>
+  <div class="vessel-row"><span>MCA</span><span id="statusMCA" class="vessel-brains">🔒</span></div>
+  <div class="vessel-row"><span>ACom</span><span id="statusACom" class="vessel-brains">🔒</span></div>
+  <div class="vessel-row"><span>AChA</span><span id="statusAChA" class="vessel-brains">🔒</span></div>
+  <p class="stat-note">Complete vessels in order to unlock new territories.</p>
+</div>
+
+<div class="map-actions">
+  <a class="action-card" href="leaderboard.html">
+    <span class="action-icon">🏆</span>
+    <span><span class="action-title">Leaderboard</span><br><span class="action-subtitle">See top explorers</span></span>
+  </a>
+  <a class="action-card" href="daily_neuro.html">
+    <span class="action-icon">🎯</span>
+    <span><span class="action-title">Daily Neuro</span><br><span class="action-subtitle">5 questions today</span></span>
+  </a>
+</div>
+
 <div class="map-wrap">
     <div class="map-inner">
     
@@ -546,7 +983,54 @@ function openLevel(category) {
     encodeURIComponent(category);
 }
 
+function countBrains(level) {
+  return playerProgress[level] && playerProgress[level].brains
+    ? Number(playerProgress[level].brains)
+    : 0;
+}
+
+function brainIcons(level) {
+  const brains = countBrains(level);
+
+  if (!levelUnlocked(level)) {
+    return '<span class="locked-text">🔒 Locked</span>';
+  }
+
+  if (brains === 0) {
+    return '🔓 Start';
+  }
+
+  return '🧠'.repeat(brains) + '🧠'.repeat(3 - brains).replace(/🧠/g, '⚫');
+}
+
+function updateDashboard() {
+  const levels = ["ICA", "ACA", "MCA", "ACom", "AChA"];
+  const completed = levels.filter(level => isCompleted(level)).length;
+  const totalBrains = levels.reduce((sum, level) => sum + countBrains(level), 0);
+  const islandPercent = Math.round((completed / levels.length) * 100);
+
+  const xp = (totalBrains * 20) % 100;
+  const brainLevel = Math.max(1, Math.floor((totalBrains * 20) / 100) + 1);
+
+  document.getElementById("completedCount").textContent = `${completed} / ${levels.length}`;
+  document.getElementById("totalBrains").textContent = totalBrains;
+  document.getElementById("islandProgress").textContent = islandPercent;
+  document.getElementById("islandFill").style.width = `${islandPercent}%`;
+
+  document.getElementById("brainLevel").textContent = brainLevel;
+  document.getElementById("brainXp").textContent = xp;
+  document.getElementById("xpFill").style.width = `${xp}%`;
+
+  document.getElementById("statusICA").innerHTML = brainIcons("ICA");
+  document.getElementById("statusACA").innerHTML = brainIcons("ACA");
+  document.getElementById("statusMCA").innerHTML = brainIcons("MCA");
+  document.getElementById("statusACom").innerHTML = brainIcons("ACom");
+  document.getElementById("statusAChA").innerHTML = brainIcons("AChA");
+}
+
 function updateMapProgress() {
+
+  updateDashboard();
 
   if (isCompleted("ICA")) {
     document.querySelector(".ica-overlay").style.display = "none";
