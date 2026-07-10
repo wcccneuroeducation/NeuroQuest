@@ -751,10 +751,10 @@ margin:15px;
     </div>
 
     <div class="stat-card progress-stat">
-      <div class="stat-label">Island Progress</div>
+      <div class="stat-label">Island Mastery</div>
       <div class="stat-value"><span id="islandProgress">0</span>%</div>
       <div class="progress-bar"><div id="islandFill" class="progress-fill"></div></div>
-      <div class="stat-note">Mastered</div>
+      <div class="stat-note"><span id="masteryBrains">0 / 0</span> Brains</div>
     </div>
   </div>
 </header>
@@ -1003,19 +1003,41 @@ function brainIcons(level) {
   return '🧠'.repeat(brains) + '🧠'.repeat(3 - brains).replace(/🧠/g, '⚫');
 }
 
+const LEVELS = ["ICA", "ACA", "MCA", "ACom", "AChA"];
+const BRAINS_PER_LEVEL = 3;
+
 function updateDashboard() {
-  const levels = ["ICA", "ACA", "MCA", "ACom", "AChA"];
+  const levels = LEVELS;
+
   const completed = levels.filter(level => isCompleted(level)).length;
-  const totalBrains = levels.reduce((sum, level) => sum + countBrains(level), 0);
-  const islandPercent = Math.round((completed / levels.length) * 100);
+
+  const totalBrains = levels.reduce(
+    (sum, level) => sum + countBrains(level),
+    0
+  );
+
+  const totalPossibleBrains = levels.length * BRAINS_PER_LEVEL;
+
+  const masteryPercent = totalPossibleBrains > 0
+    ? Math.round((totalBrains / totalPossibleBrains) * 100)
+    : 0;
 
   const xp = (totalBrains * 20) % 100;
-  const brainLevel = Math.max(1, Math.floor((totalBrains * 20) / 100) + 1);
+  const brainLevel = Math.max(
+    1,
+    Math.floor((totalBrains * 20) / 100) + 1
+  );
 
-  document.getElementById("completedCount").textContent = `${completed} / ${levels.length}`;
+  document.getElementById("completedCount").textContent =
+    `${completed} / ${levels.length}`;
+
   document.getElementById("totalBrains").textContent = totalBrains;
-  document.getElementById("islandProgress").textContent = islandPercent;
-  document.getElementById("islandFill").style.width = `${islandPercent}%`;
+
+  document.getElementById("islandProgress").textContent = masteryPercent;
+  document.getElementById("islandFill").style.width = `${masteryPercent}%`;
+
+  document.getElementById("masteryBrains").textContent =
+    `${totalBrains} / ${totalPossibleBrains}`;
 
   document.getElementById("brainLevel").textContent = brainLevel;
   document.getElementById("brainXp").textContent = xp;
