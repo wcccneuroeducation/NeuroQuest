@@ -25,14 +25,7 @@
 }
 body.map-active {
   padding: 0;
-
-  background:
-    linear-gradient(
-      180deg,
-      #163451 0%,
-      #0d2239 45%,
-      #07111f 100%
-    );
+  background: #07111f;
 }
     h1 {
         margin: 10px 0 20px;
@@ -343,10 +336,11 @@ z-index:2;
 }
 
 /* ===== Neuro Quest dashboard header ===== */
-
 #mapBox {
   width: 100%;
   min-height: 100vh;
+  padding-bottom: 70px;
+  box-sizing: border-box;
 
   background:
     linear-gradient(
@@ -582,6 +576,9 @@ z-index:2;
 
   body.map-active {
     padding: 0;
+  }
+     #mapBox {
+    padding-bottom: 35px;
   }
 
   .quest-header {
