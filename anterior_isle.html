@@ -23,7 +23,9 @@
     text-align: center;
     color: #ffffff;
 }
-
+body.map-active {
+  background: #050b15;
+}
     h1 {
         margin: 10px 0 20px;
         font-size: clamp(32px, 7vw, 56px);
@@ -909,14 +911,18 @@ window.googleLogin = async function () {
 
 onAuthStateChanged(auth, async user => {
   if (!user) {
-    currentUser = null;
-    document.getElementById("loginBox").classList.remove("hidden");
-    document.getElementById("mapBox").classList.add("hidden");
-    return;
-  }
+  currentUser = null;
+
+  document.body.classList.remove("map-active");
+
+  document.getElementById("loginBox").classList.remove("hidden");
+  document.getElementById("mapBox").classList.add("hidden");
+  return;
+}
 
   currentUser = user;
 
+document.body.classList.add("map-active");
   await set(ref(db, `${APP_ROOT}/users/${user.uid}`), {
     displayName: user.displayName,
     email: user.email,
