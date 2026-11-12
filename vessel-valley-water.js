@@ -9,7 +9,7 @@
  svg.innerHTML=`<defs>
  <radialGradient id="vv-organism-warmth"><stop stop-color="#ffd1a1" stop-opacity="1"/><stop offset=".5" stop-color="#ff623e" stop-opacity=".7"/><stop offset="1" stop-color="#df3728" stop-opacity="0"/></radialGradient>
  <radialGradient id="vv-neuron-glow"><stop offset="0" stop-color="#f6b3ff" stop-opacity=".8"/><stop offset=".45" stop-color="#c45cff" stop-opacity=".5"/><stop offset="1" stop-color="#a138e4" stop-opacity="0"/></radialGradient>
- <clipPath id="vv-waterfall-stream"><path d="M197 573 Q200 575 207 575 L201 600 L200 624 L186 626 L189 598Z"/></clipPath>
+ <clipPath id="vv-waterfall-stream"><path d="M185 571 Q191 570 197 573 L191 598 L191 628 L179 630 L177 597Z"/></clipPath>
  <clipPath id="vv-shore-only"><path d="M0 185H508V667H0Z M27 190H472V610H27Z" fill-rule="evenodd"/><ellipse cx="194" cy="631" rx="27" ry="15"/></clipPath></defs>
  <g class="neuron-life">
   <circle class="neuron-pulse-ring" cx="132" cy="73" r="13"/>
@@ -20,17 +20,17 @@
   <path class="neuron-signal signal-three" d="M139 76 Q153 83 169 89 Q178 91 184 96"/>
  </g>
  <g clip-path="url(#vv-waterfall-stream)">
-  <path class="fall-line" d="M201 575 Q192 595 192 624"/>
-  <path class="fall-line fall-second" d="M205 576 Q199 599 198 625"/>
-  <path class="fall-line fall-fine" d="M198 577 Q190 600 190 622"/>
+  <path class="fall-line" d="M189 574 Q181 593 184 627"/>
+  <path class="fall-line fall-second" d="M193 575 Q187 600 189 628"/>
+  <path class="fall-line fall-fine" d="M187 578 Q180 601 182 626"/>
  </g>
- <ellipse class="waterfall-foam" cx="194" cy="627" rx="9" ry="3"/>
- <path class="waterfall-splash" d="M190 627 Q186 620 182 623 M198 627 Q204 620 207 624"/>
- <ellipse class="foam-ring" cx="194" cy="631" rx="17" ry="5"/>
- <ellipse class="foam-ring" cx="194" cy="631" rx="22" ry="7" style="--delay:-2.4s"/>`;
+ <ellipse class="waterfall-foam" cx="185" cy="631" rx="9" ry="3"/>
+ <path class="waterfall-splash" d="M181 631 Q176 625 173 628 M189 631 Q195 625 198 628"/>
+ <ellipse class="foam-ring" cx="185" cy="635" rx="17" ry="5"/>
+ <ellipse class="foam-ring" cx="185" cy="635" rx="22" ry="7" style="--delay:-2.4s"/>`;
  for(let i=0;i<9;i++){
   const bubble=document.createElementNS(ns,'circle');
-  bubble.setAttribute('class','water-bubble');bubble.setAttribute('cx',String(183+(i*7)%24));bubble.setAttribute('cy',String(627+(i%3)*2));bubble.setAttribute('r',String(1.1+(i%3)*.55));
+  bubble.setAttribute('class','water-bubble');bubble.setAttribute('cx',String(179+(i*7)%15));bubble.setAttribute('cy',String(630+(i%3)*2));bubble.setAttribute('r',String(1.1+(i%3)*.55));
   bubble.style.cssText=`--duration:${2.6+(i%4)*.6}s;--delay:${-i*.73}s;--drift:${(i%2?1:-1)*(2+i%4)}px`;
   svg.append(bubble);
  }

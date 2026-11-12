@@ -35,8 +35,8 @@
 @keyframes outlet-blood-fall {
   0%,8% { opacity:0; transform:translate(0,0) scale(.65); }
   12% { opacity:.85; transform:translate(0,1px) scale(.8); }
-  43% { opacity:.8; transform:translate(-6px,35px) scale(.85); }
-  46%,100% { opacity:0; transform:translate(-6px,37px) scale(.5); }
+  43% { opacity:.8; transform:translate(1px,49px) scale(.85); }
+  46%,100% { opacity:0; transform:translate(1px,51px) scale(.5); }
 }
 @keyframes outlet-blood-impact {
   0%,42% { opacity:0; transform:scale(.3); }
