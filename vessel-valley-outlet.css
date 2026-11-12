@@ -53,3 +53,6 @@
  .outlet-blood-drop,.outlet-blood-ring { opacity:0; }
  .outlet-blood-plume { opacity:.3; }
 }
+
+/* Drop scaling must pivot around the droplet, never the full SVG canvas. */
+.outlet-blood-drop { transform-box:fill-box; transform-origin:center; }

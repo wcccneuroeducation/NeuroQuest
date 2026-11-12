@@ -78,3 +78,6 @@
  50% { transform:rotate(1.2deg) skewX(.25deg); }
 }
 @media(prefers-reduced-motion:reduce) { .valley-water .coral-sway { animation:none; transform:none; } }
+
+/* Keep bubble scaling local rather than scaling its map coordinates. */
+.valley-water .water-bubble { transform-box:fill-box; transform-origin:center; }
