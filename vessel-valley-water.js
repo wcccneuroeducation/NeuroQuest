@@ -30,7 +30,7 @@
  <ellipse class="foam-ring" cx="185" cy="635" rx="22" ry="7" style="--delay:-2.4s"/>`;
  for(let i=0;i<9;i++){
   const bubble=document.createElementNS(ns,'circle');
-  bubble.setAttribute('class','water-bubble');bubble.setAttribute('cx',String(179+(i*7)%15));bubble.setAttribute('cy',String(630+(i%3)*2));bubble.setAttribute('r',String(1.1+(i%3)*.55));
+  bubble.setAttribute('class','water-bubble');bubble.setAttribute('cx',String(179+(i*7)%15));bubble.setAttribute('cy',String(630+(i%3)*2));bubble.setAttribute('r',String(1.7+(i%3)*.8));
   bubble.style.cssText=`--duration:${2.6+(i%4)*.6}s;--delay:${-i*.73}s;--drift:${(i%2?1:-1)*(2+i%4)}px`;
   svg.append(bubble);
  }
