@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Vessel Valley</title>
+<link rel="stylesheet" href="vessel-valley-outlet.css">
+<link rel="stylesheet" href="vessel-valley-water.css?v=20261112-9">
+<link rel="stylesheet" href="vessel-valley-connections.css">
+<script src="vessel-valley-connections.js" defer></script>
+<script src="vessel-valley-water.js?v=20261112-9" defer></script>
+<script src="vessel-valley-outlet.js" defer></script>
 <style>
     body {
         margin: 0;
@@ -351,7 +357,29 @@ margin:15px;
 <div class="map-wrap">
     <div class="map-inner">
     
-    <img src="vessel_valley.png"  class="base-map" alt="Vessel Valley map">
+    <img src="artwork-review/coral/terrain-no-coral-v2.png"  class="base-map" alt="Vessel Valley map">
+    <svg class="outlet-a-layer" viewBox="0 0 508 667" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <!-- Stop at the pipe mouth: the source cut-out's existing drip is not displayed. -->
+      <defs><clipPath id="outlet-a-window"><rect x="190" y="529" width="55" height="67"/></clipPath></defs>
+      <g clip-path="url(#outlet-a-window)">
+        <image class="outlet-a-image" href="artwork-review/outlet-a/outlet-transparent.png" width="493" height="667"/>
+      </g>
+      <!-- Leak coordinates share the original 508 x 667 map canvas. -->
+      <defs>
+        <radialGradient id="outlet-blood-tint"><stop stop-color="#b83938" stop-opacity=".32"/><stop offset="1" stop-color="#c95547" stop-opacity="0"/></radialGradient>
+        <clipPath id="outlet-blood-water"><ellipse cx="197" cy="633" rx="22" ry="9"/></clipPath>
+      </defs>
+      <g class="outlet-a-blood">
+        <g clip-path="url(#outlet-blood-water)">
+          <ellipse class="outlet-blood-plume" cx="197" cy="633" rx="15" ry="5" fill="url(#outlet-blood-tint)"/>
+          <ellipse class="outlet-blood-ring" cx="197" cy="631" rx="6" ry="1.8"/>
+        </g>
+        <path class="outlet-blood-bead" d="M203 589 Q201 592 201.5 594 Q203 596 204.5 594 Q205 592 203 589Z"/>
+        <path class="outlet-blood-drop" d="M203 591 Q200.5 595 202 596.5 Q204 598 205 595.5 Q205 594 203 591Z"/>
+        <path class="outlet-blood-drop second" d="M203 591 Q201 594 202 595.5 Q204 597 204.5 595 Q205 594 203 591Z"/>
+      </g>
+      <rect class="outlet-a-viewport" x="190" y="529" width="55" height="67" fill="transparent"/>
+    </svg>
     <img
 src="vessel_valley_wave1.png"
 class="course-overlay csf-wave-1">
@@ -482,6 +510,9 @@ localStorage.getItem("neuroProgress") || "{}"
 
 let playerProgress =
 progress[playerName] || {};
+
+window.vesselValleyOutlet?.update(playerName, playerProgress);
+window.vesselValleyConnections?.update(playerName, playerProgress);
 
 if(
 playerProgress["ICA"] &&

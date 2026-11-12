@@ -1,0 +1,55 @@
+.outlet-a-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.outlet-a-layer .outlet-a-image { visibility: hidden; }
+.outlet-a-layer.is-unlocked .outlet-a-image { visibility: visible; }
+.outlet-a-layer.is-revealing .outlet-a-image {
+  animation: outlet-a-rise 1000ms cubic-bezier(.2,.7,.3,1) both;
+}
+.outlet-a-layer.is-paused .outlet-a-image { animation-play-state: paused; }
+@keyframes outlet-a-rise {
+  0% { transform: translateY(86px); }
+  76% { transform: translateY(-3px); }
+  90% { transform: translateY(1px); }
+  100% { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .outlet-a-layer.is-revealing .outlet-a-image { animation: none; }
+}
+
+/* Blood starts only once the completed outlet is settled and on screen. */
+.outlet-a-blood { display:none; visibility:hidden; pointer-events:none; }
+.outlet-a-layer.is-leaking .outlet-a-blood { display:inline; visibility:visible; }
+.outlet-blood-bead { fill:#ab302b; opacity:.75; }
+.outlet-blood-drop { fill:#bb302c; opacity:0; animation:outlet-blood-fall 3.6s linear infinite; }
+.outlet-blood-drop.second { animation-delay:1.8s; }
+.outlet-blood-ring { fill:none; stroke:#bc5847; stroke-width:.7; opacity:0; transform-box:fill-box; transform-origin:center; animation:outlet-blood-impact 3.6s linear infinite; }
+.outlet-blood-plume { transform-box:fill-box; transform-origin:center; animation:outlet-blood-disperse 7.2s ease-out infinite; }
+.outlet-a-layer.is-paused .outlet-a-blood * { animation-play-state:paused; }
+@keyframes outlet-blood-fall {
+  0%,8% { opacity:0; transform:translate(0,0) scale(.65); }
+  12% { opacity:.85; transform:translate(0,1px) scale(.8); }
+  43% { opacity:.8; transform:translate(-6px,35px) scale(.85); }
+  46%,100% { opacity:0; transform:translate(-6px,37px) scale(.5); }
+}
+@keyframes outlet-blood-impact {
+  0%,42% { opacity:0; transform:scale(.3); }
+  45% { opacity:.4; transform:scale(.5); }
+  70%,100% { opacity:0; transform:scale(2); }
+}
+@keyframes outlet-blood-disperse {
+  0% { opacity:0; transform:translate(0,0) scale(.55); }
+  28% { opacity:.65; }
+  100% { opacity:0; transform:translate(6px,1px) scale(1.4); }
+}
+@media(prefers-reduced-motion:reduce) {
+ .outlet-a-blood * { animation:none !important; }
+ .outlet-blood-drop,.outlet-blood-ring { opacity:0; }
+ .outlet-blood-plume { opacity:.3; }
+}

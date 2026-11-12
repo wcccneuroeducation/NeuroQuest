@@ -1,0 +1,6 @@
+﻿Built-in image generation was used to reconstruct terrain (two attempts) and generate an extraction draft. The generated extraction was not used because it altered the outlet; the final outlet uses original source pixels.
+Terrain prompt: Remove only the short open-ended outlet below ACom, x196..239 y529..613 on original 493x667 canvas. Reconstruct continuous golden rock, preserve original waterfall and all connecting vessels. No new pipe, no second pipe, no crop, transparent background.
+Refinement prompt: Repair the visible diagonal boundary under ACom with coherent rock shelves and natural shadows. Preserve the thin waterfall and all other features.
+Deliverables: terrain-clean-v2.png (DRAFT: local transition unresolved); outlet-transparent.png; outlet-contrast.png; combined.png.
+All deliverable canvas dimensions: 493x667. Original source asset unchanged. Source-pixel extraction and full-canvas registration used for final outlet. Existing red drip is included with outlet. Terrain changes restricted to the 1933 extracted outlet pixels. Recombined map has 0 pixel differences against original. The narrow reconstruction still leaves a visible local transition; do not integrate as finished artwork.
+No gameplay, progression, saved player data, badges or navigation modified.
